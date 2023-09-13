@@ -1,0 +1,6 @@
+INSTRUCTIONS
+
+Create a command-line Node application that returns:
+1. "Good Morning", if the time of the day is before 12:00:00 PM EST
+2. "Good Afternoon", if the time is greater than 12:00:00 PM EST and less than 6:00:00 PM EST.
+3. "Good Evening", if the time is greater than 6:00:00 PM EST.
