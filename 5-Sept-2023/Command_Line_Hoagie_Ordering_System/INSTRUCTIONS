@@ -1,0 +1,23 @@
+Create a hoagie, single-user command-line ordering system.
+Using Inquirer.js, if you want -> (https://github.com/SBoudrias/Inquirer.js/tree/master/packages/input),  you can always choose a module that suits you.    The bottom line is that the program works, bug-free and is reliable and completed on-time.
+
+Using the keyboard, build a system that asks the user for their selections (shown below).   When you have completed the order, show the user their final price.   (No taxes are included.)    Do not build a web page.   This is a command line application.
+
+
+
+Type of Bread Choice:
+
+Wheat (+0.50) White (0.00) or Pita (+1.00)
+
+Type of meats
+
+Roast Beef (+2.50), Ham (+ 1.75) Turkey (+2.00), Tuna (3.00)
+
+Type of Cheeses
+
+Swiss (+1.25) , American (+0.50), Cheddar (+2.25)
+
+Additional Toppings (each one:  +0.25)
+
+Tomato, Pickles, Onions, Mushrooms, Hot Chili's, Green Peppers and Olives
+
