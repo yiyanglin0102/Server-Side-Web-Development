@@ -1,0 +1,19 @@
+Let's create either a Node Console Application or a PHP Web application that will determine if you are 16 years or or not.
+We will start working in class on this application.    You may finish in during our laboratory timeframe.   However, if you do not, you will have the opportunity to complete it at home during the upcoming week.
+
+Let's collect the following information:
+
+1. Your month of birth (1 thru 12)
+
+2. Your date of birth (1 thru 31)
+
+3. Your year of birth ( 1900 thru 2023 )
+
+
+
+Notes:
+a. Make sure we get it right.   If i was born on the 9th of November, and today is July 12th, then my age hasn't changed yet.
+
+b. Validations, yes.   Check the inputs.  If you allow me to type in "A" or "I am not a human", then, those are not numbers and you need to tell me to fix it.
+
+c. You must use Javascript modules.    You will lose 10 points if you create globally scoped function objects for your core application logic.

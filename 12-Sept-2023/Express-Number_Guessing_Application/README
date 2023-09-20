@@ -1,0 +1,3 @@
+run `npm install` in './'
+run `node server.mjs` in './'
+open 'index.html' file in './public'
