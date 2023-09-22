@@ -1,0 +1,13 @@
+INSTRUCTIONS
+The backend (Application Tier)
+Create a GET and POST routes for returning baby names.   The GET saves the baby name that the user likes.   The POST returns 5 new and different baby names in an array.
+
+The UI Layer
+Create a application that allows me to ask the computer for baby names and lets me save the one's I like.
+
+Requirements
+1. Must use frontend ES6 Modules in your client-side javascript.
+
+2. Must use Node in your backend javascript.
+
+3. Must use CSS.  Your CSS should create a nice UI that looks good on a) a mobile phone and b) on a standard laptop display (1440 x 980)
