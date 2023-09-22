@@ -26,22 +26,16 @@ function getRandomName() {
 
 const likedNames = [];
 
-// GET route to return a random baby name
+app.post('/liked-baby', (req, res) => {
+  const randomBaby = getRandomName();
+  res.json({ data: randomBaby });
+});
+
 app.post('/random-baby', (req, res) => {
   const randomBaby = getRandomName();
   res.json({ data: randomBaby });
 });
 
-// POST route to save a liked baby name
-app.post('/liked-baby', (req, res) => {
-  const { name } = req.body;
-  if (name) {
-    likedNames.push(name);
-    res.status(201).json({ message: 'Name saved successfully' });
-  } else {
-    res.status(400).json({ message: 'Bad request' });
-  }
-});
 
 // POST route to return 5 new and different baby names in an array
 app.post('/generate-baby-names', (req, res) => {
