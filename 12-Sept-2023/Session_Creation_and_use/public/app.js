@@ -1,24 +1,33 @@
-// public/app.js
-document.addEventListener('DOMContentLoaded', () => {
-  const checkButton = document.getElementById('checkButton');
-  const resultDiv = document.getElementById('result');
-  
-  // Example usage
+// Get references to HTML elements
+const itemList = document.getElementById("item-list");
+const addItemButton = document.getElementById("addItemButton");
+const buttonNames = []; // Array to store button names
 
-  checkButton.addEventListener('click', () => {
+// Add a click event listener to the "Add Item" button
+addItemButton.addEventListener("click", () => {
+  // Clear the existing buttons
+  while (itemList.firstChild) {
+    itemList.removeChild(itemList.firstChild);
+  }
 
+  // Get the text from the input field
+  for (let i = 0; i < 5; i++) {
     fetch('http://localhost:3000/random-baby')
       .then((response) => response.json())
       .then((data) => {
         const randomBaby = data.data;
-        console.log(`${randomBaby}`);
-     // Set the innerHTML of the resultText element to display the randomBaby
-     resultText.textContent = `Random Baby: ${randomBaby}`;
+        const newItemValue = randomBaby;
+        const newButton = document.createElement("button");
+        newButton.textContent = newItemValue;
+        itemList.appendChild(newButton);
 
-     // Remove the 'hidden' class to show the result element
-     resultDiv.classList.remove('hidden');
-
+        // Add a click event listener to the new button
+        newButton.addEventListener("click", () => {
+          alert(`Added Baby Name: ${newItemValue}`);
+          buttonNames.push(newItemValue);
+        });
       })
       .catch((error) => console.error(error));
-  });
+  }
+  console.log(buttonNames)
 });

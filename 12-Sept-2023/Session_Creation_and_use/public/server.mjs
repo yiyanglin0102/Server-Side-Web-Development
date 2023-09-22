@@ -5,8 +5,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json()); // Parse JSON request bodies
 
-// Sample array of names
 const names = [
   "Emily", "James", "Sophia", "William", "Olivia", "Benjamin", "Mia", "Daniel", "Ava", "Michael",
   "Charlotte", "Elijah", "Amelia", "Alexander", "Harper", "Henry", "Evelyn", "Samuel", "Abigail", "Matthew",
@@ -24,9 +24,35 @@ function getRandomName() {
   return names[randomIndex];
 }
 
-app.get('/random-baby', (req, res) => {
+const likedNames = [];
+
+// GET route to return a random baby name
+app.post('/random-baby', (req, res) => {
   const randomBaby = getRandomName();
   res.json({ data: randomBaby });
+});
+
+// POST route to save a liked baby name
+app.post('/liked-baby', (req, res) => {
+  const { name } = req.body;
+  if (name) {
+    likedNames.push(name);
+    res.status(201).json({ message: 'Name saved successfully' });
+  } else {
+    res.status(400).json({ message: 'Bad request' });
+  }
+});
+
+// POST route to return 5 new and different baby names in an array
+app.post('/generate-baby-names', (req, res) => {
+  const newNames = [];
+  while (newNames.length < 5) {
+    const randomName = getRandomName();
+    if (!newNames.includes(randomName) && !likedNames.includes(randomName)) {
+      newNames.push(randomName);
+    }
+  }
+  res.json({ data: newNames });
 });
 
 app.listen(PORT, () => {
