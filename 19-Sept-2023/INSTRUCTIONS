@@ -1,0 +1,14 @@
+INSTRUCTIONS
+Choose one from one of the following and build our an object-orientated domain model.
+Using functional tests, proof your idea works
+
+Ideas  (Object orientation)
+Student Management System - This project could involve creating a system for managing student information, such as personal details, grades, and attendance records.
+
+Weather Application - This project could involve creating a weather application that allows users to enter a location and get the current weather conditions, as well as a five-day forecast.
+
+Library Management System - This project could involve creating a system for managing a library's inventory of books, including adding, removing, and searching for book.
+
+Notifications System - This idea is to build out a domain model that would allow the developer to use different kinds of notices - alerts, warnings, danger, etc.. and show them with different ways; such as notification API, windows, dialogs, in-place messages (next to the element in the DOM)
+
+Language Selector - This domain model would allow me to load messages, phrases or words for any language and show them in the application, with a nice API
