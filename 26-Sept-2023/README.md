@@ -11,8 +11,6 @@ This is a simple Powerball Lottery Numbers generator and user interface (UI) cre
 
 ## Getting Started
 
-[![DEMO](https://img.youtube.com/vi/RNavZzfCACk/0.jpg)](https://youtu.be/RNavZzfCACk)
-
 Follow these steps to run the project locally on your machine.
 
 ### Prerequisites
