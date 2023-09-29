@@ -1,0 +1,11 @@
+INSTRUCTIONS
+
+The backend is a Microservice:
+Create a microserver that return a set of 5 random numbers plus a powerball number for the powerball lottery.   The service will never return the same set of numbers from the previous request.   If you service continuously returns the same set of numbers, then it doesn't work and you need to fix it.
+
+The User Interface:
+Create a UI that consumes or uses this service.   Have a button that requests a new set of lottery numbers on demand.
+
+If the user likes a set of numbers, they can save it in their browsers memory (localStorage).
+
+Have a button that will show all saved sets of lottery numbers.   When they are displayed, the user can delete one of them, that they want.
