@@ -2,6 +2,8 @@
 
 This is a simple Powerball Lottery Numbers generator and user interface (UI) created using HTML, CSS, and JavaScript. The application generates random Powerball numbers and allows users to save and display the generated numbers.
 
+[![DEMO](https://img.youtube.com/vi/YSZ_lJUNVbs/0.jpg)](https://youtu.be/YSZ_lJUNVbs)
+
 ## Features
 
 - Generate new random Powerball numbers.
