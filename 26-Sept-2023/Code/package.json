@@ -1,0 +1,17 @@
+{
+  "name": "The Lottery Numbers Generator",
+  "version": "1.0.0",
+  "description": "A simple Powerball server and UI",
+  "main": "powerball_server.js",
+  "scripts": {
+    "start": "node powerball_server.js & npx http-server --p 4000 -c-1"
+  },
+  "keywords": ["powerball", "server", "ui"],
+  "author": "Yi-Yang Lin",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "http-server": "^0.12.3"
+  }
+}

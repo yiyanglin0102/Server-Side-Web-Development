@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateNewNumbers() {
         // Make a request to your server's API here to get new lottery numbers
         // Replace the URL with the actual API endpoint
-        fetch('http://localhost:3000/get_powerball_numbers')
+        fetch('http://127.0.0.1:3000/get_powerball_numbers')
             .then(response => response.json())
             .then(data => {
                 const numbers = data.numbers;
