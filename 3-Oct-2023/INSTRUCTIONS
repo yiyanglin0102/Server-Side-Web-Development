@@ -1,5 +1,5 @@
 INSTRUCTIONS
 
 Create a basic, client/server implementation using Sockets.
-You need to have a server and client.
-I will use incognito mode to launch several connections to your server and I should be able to see each client message on each incognito tab I use.
+Having a server and a client like a chat room.
+Able to use incognito mode to launch several connections to the server and  be able to see each client message with each connection id with input from frontend inbox  on each incognito tab.
