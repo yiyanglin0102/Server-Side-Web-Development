@@ -2,6 +2,8 @@
 
 A simple chatroom application built with React for the frontend and Express with Socket.io for the backend. Each message sent is tagged with a unique connection ID.
 
+[![DEMO](https://img.youtube.com/vi/o3Z5OzvDBYI/0.jpg)](https://youtu.be/o3Z5OzvDBYI)
+
 ## Features
 
 - Real-time messaging
