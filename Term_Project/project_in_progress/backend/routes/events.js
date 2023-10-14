@@ -17,6 +17,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const newEvent = new Event({
         title: req.body.title,
+        patient: req.body.patient,
+        content: req.body.content,
         username: req.body.username,
         start: req.body.start,
         end: req.body.end
