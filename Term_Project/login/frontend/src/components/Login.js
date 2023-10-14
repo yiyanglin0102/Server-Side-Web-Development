@@ -1,11 +1,11 @@
-// frontend/components/Login.js
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
 
 function Login(props) {
     const [userData, setUserData] = useState({ username: "", password: "" });
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -13,7 +13,10 @@ function Login(props) {
             const response = await login(userData);
             localStorage.setItem('token', response.data.token);
             setMessage("Logged in successfully!");
-            // Navigate to another page if needed
+
+            props.onLoginSuccess(); // Notify the parent component of successful login
+            navigate('/dashboard'); // Redirect to dashboard upon successful login
+
         } catch (error) {
             setMessage("Error logging in. Please try again.");
         }
