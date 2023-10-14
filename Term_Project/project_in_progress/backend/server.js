@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
+const Patient = require('./models/Patient');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const eventsRouter = require('./routes/events');  // Make sure you've set up routes/events.js as per previous instructions
-
+const patientsRouter = require('./routes/patients');  // Assuming routes directory is at the root level
 
 const app = express();
 const PORT = 3000;
@@ -67,6 +68,7 @@ app.post('/login', (req, res) => {
 });
 
 app.use('/events', eventsRouter);
+app.use('/patients', patientsRouter);
 
 
 // Protected route example for fetching user events
@@ -91,5 +93,27 @@ app.post('/events', passport.authenticate('jwt', { session: false }), (req, res)
     User.findById(req.user.id).then(user => {
         user.events.push(newEvent);
         user.save().then(user => res.json(newEvent)).catch(err => res.status(500).json({ message: 'Error saving event.' }));
+    });
+});
+
+
+
+
+// Protected route example for fetching user events
+app.get('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.json(req.user.patients);
+});
+
+
+app.post('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { firstname } = req.body;
+
+    const newPatient = {
+        firstname: firstname
+    };
+
+    Patient.findById(req.user.id).then(user => {
+        user.patients.push(newPatient);
+        user.save().then(user => res.json(newPatient)).catch(err => res.status(500).json({ message: 'Error saving event.' }));
     });
 });
