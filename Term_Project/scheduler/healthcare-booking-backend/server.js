@@ -7,7 +7,7 @@ const eventsRouter = require('./routes/events');  // Make sure you've set up rou
 const app = express();
 
 // Connect to MongoDB (Using Mongoose)
-mongoose.connect('mongodb://localhost:27017/eventScheduler', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/calendarApp', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middlewares
 app.use(bodyParser.json());
