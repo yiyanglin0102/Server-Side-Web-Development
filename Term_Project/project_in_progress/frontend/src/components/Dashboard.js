@@ -31,11 +31,12 @@ const Dashboard = (props) => {
     }
   }, [selectedTab]);
 
-  const handleSavePatient = (firstname) => {
-    console.log(`Saving new patient: ${firstname}`);
+  const handleSavePatient = ({firstname, lastname}) => {
+    console.log(`Saving new patient: ${firstname} , ${lastname}`);
 
     axios.post('http://localhost:3000/patients', {
-      firstname: firstname
+      firstname: firstname,
+      lastname: lastname,
     })
       .then(response => {
         setPatients([...patients, response.data]);
@@ -77,7 +78,7 @@ const Dashboard = (props) => {
             {!isAddingPatient && (
               <ul>
                 {patients.map(patient => (
-                  <li key={patient._id}>{patient.firstname}</li>
+                  <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
 
                 ))}
               </ul>

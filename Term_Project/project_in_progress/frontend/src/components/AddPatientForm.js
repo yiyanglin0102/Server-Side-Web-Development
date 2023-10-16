@@ -1,12 +1,12 @@
-// AddPatientForm.js
 import React, { useState } from 'react';
 
 const AddPatientForm = ({ onClose, onSave }) => {
-  const [patientName, setPatientName] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(patientName);
+    onSave({ firstname, lastname }); // Send as an object
     onClose();
   };
 
@@ -15,9 +15,15 @@ const AddPatientForm = ({ onClose, onSave }) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Patient Name"
-          value={patientName}
-          onChange={(e) => setPatientName(e.target.value)}
+          placeholder="First Name"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
         />
         <button type="submit">Save</button>
       </form>

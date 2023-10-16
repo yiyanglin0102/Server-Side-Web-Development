@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const patientSchema = new Schema({
-    firstname: { type: String, required: true }
-    // middleName: String,
-    // lastName: { type: String, required: true },
+    firstname: { type: String, required: true },
+    middleName: String,
+    lastname: { type: String, required: true },
     // dob: { type: Date, required: true },
     // sex: { type: String, required: true },
     // ethnicity: String,

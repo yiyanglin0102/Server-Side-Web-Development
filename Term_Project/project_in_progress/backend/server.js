@@ -99,21 +99,21 @@ app.post('/events', passport.authenticate('jwt', { session: false }), (req, res)
 
 
 
-// Protected route example for fetching user events
-app.get('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.json(req.user.patients);
-});
+// // Protected route example for fetching user events
+// app.get('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     res.json(req.user.patients);
+// });
 
 
-app.post('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { firstname } = req.body;
+// app.post('/patients', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     const { firstname } = req.body;
 
-    const newPatient = {
-        firstname: firstname
-    };
+//     const newPatient = {
+//         firstname: firstname
+//     };
 
-    Patient.findById(req.user.id).then(user => {
-        user.patients.push(newPatient);
-        user.save().then(user => res.json(newPatient)).catch(err => res.status(500).json({ message: 'Error saving event.' }));
-    });
-});
+//     Patient.findById(req.user.id).then(user => {
+//         user.patients.push(newPatient);
+//         user.save().then(user => res.json(newPatient)).catch(err => res.status(500).json({ message: 'Error saving event.' }));
+//     });
+// });

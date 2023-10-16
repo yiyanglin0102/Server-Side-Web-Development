@@ -14,11 +14,13 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: err.message }); // Return error if any.
     }
 });
-
 // Endpoint to create a new patient
 router.post('/', async (req, res) => {
+    const { firstname, lastname } = req.body;
+
     const newPatient = new Patient({
-        firstname: req.body.firstname
+        firstname,
+        lastname
     });
 
     try {
