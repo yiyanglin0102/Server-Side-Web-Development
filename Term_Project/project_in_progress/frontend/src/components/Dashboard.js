@@ -24,7 +24,9 @@ const Dashboard = (props) => {
   useEffect(() => {
     if (selectedTab === 'patient') {
       fetchPatients()
-        .then(data => setPatients(data))
+        .then(data => {
+          setPatients(data); console.log(data); // log here
+        })
         .catch(err => console.error(err));
     }
   }, [selectedTab]);
@@ -75,7 +77,8 @@ const Dashboard = (props) => {
             {!isAddingPatient && (
               <ul>
                 {patients.map(patient => (
-                  <li key={patient.id}>{patient.firstname}</li>
+                  <li key={patient._id}>{patient.firstname}</li>
+
                 ))}
               </ul>
             )}
