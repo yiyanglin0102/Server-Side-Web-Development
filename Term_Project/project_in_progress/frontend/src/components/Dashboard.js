@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EventScheduler from './EventScheduler';
+import Message from './Message';
 import AddPatientForm from './AddPatientForm';
 import { fetchPatients } from '../api/patients';
 import axios from 'axios';
@@ -67,6 +68,12 @@ const Dashboard = (props) => {
         >
           Patient
         </button>
+        <button
+          className={`tab-button ${selectedTab === 'message' ? 'active' : ''}`}
+          onClick={() => handleTabChange('message')}
+        >
+          Message
+        </button>
       </div>
 
       <div className="tab-content">
@@ -87,6 +94,7 @@ const Dashboard = (props) => {
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
           </div>
         )}
+        {selectedTab === 'message' && <Message username={props.username} />}
       </div>
     </div>
   );
