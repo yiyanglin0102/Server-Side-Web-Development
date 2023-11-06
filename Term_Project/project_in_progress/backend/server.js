@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const eventsRouter = require('./routes/events');
 const patientsRouter = require('./routes/patients');
+const mailsRouter = require('./routes/mails');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 require('dotenv').config();
@@ -34,3 +35,5 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/events', eventsRouter);
 app.use('/patients', patientsRouter);
+app.use('/mails', mailsRouter);
+

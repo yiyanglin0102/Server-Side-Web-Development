@@ -3,11 +3,13 @@ import EventScheduler from './EventScheduler';
 import Message from './Message';
 import AddPatientForm from './AddPatientForm';
 import { fetchPatients } from '../api/patients';
+import { fetchMails } from '../api/mails';
 import axios from 'axios';
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
   const [patients, setPatients] = useState([]);
+  const [mails, setMails] = useState([]);
   const [isAddingPatient, setIsAddingPatient] = useState(false);
 
   const handleTabChange = (tab) => {
@@ -27,6 +29,14 @@ const Dashboard = (props) => {
       fetchPatients()
         .then(data => {
           setPatients(data);
+          // console.log(data); // log here
+        })
+        .catch(err => console.error(err));
+    }
+    if (selectedTab === 'message') {
+      fetchMails()
+        .then(data => {
+          setMails(data);
           // console.log(data); // log here
         })
         .catch(err => console.error(err));
@@ -88,7 +98,7 @@ const Dashboard = (props) => {
                 {patients.map(patient => (
                   patient.host === props.username ? (
                     <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
-                  ) : null 
+                  ) : null
                 ))}
               </ul>
             )}
@@ -96,7 +106,12 @@ const Dashboard = (props) => {
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
           </div>
         )}
-        {selectedTab === 'message' && <Message username={props.username} />}
+        {selectedTab === 'message' && <Message username={props.username} /> && <ul>
+          {mails.map(mail => (
+            <li key={mail.id}>{mail.title} {mail.content}</li>
+          )
+          )}
+        </ul>}
       </div>
     </div>
   );
