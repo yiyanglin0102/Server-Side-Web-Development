@@ -21,7 +21,7 @@ const patientSchema = new Schema({
     // workPhone: String,
     // cellPhone: String,
     // comments: String,
-    // // ... Add other fields as required
+    // ... Add other fields as required
 });
 
 module.exports = Patient = mongoose.model('Patient', patientSchema);

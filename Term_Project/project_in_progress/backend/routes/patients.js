@@ -9,11 +9,12 @@ router.get('/', async (req, res) => {
     try {
         const patients = await Patient.find(); // Fetch all patients from the database.
         res.json(patients);
-        console.log(patients)
+        // console.log(patients)
     } catch (err) {
         res.status(500).json({ message: err.message }); // Return error if any.
     }
 });
+
 // Endpoint to create a new patient
 router.post('/', async (req, res) => {
     const { firstname, lastname } = req.body;
