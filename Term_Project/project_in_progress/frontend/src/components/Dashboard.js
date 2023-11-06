@@ -26,18 +26,20 @@ const Dashboard = (props) => {
     if (selectedTab === 'patient') {
       fetchPatients()
         .then(data => {
-          setPatients(data); console.log(data); // log here
+          setPatients(data);
+          // console.log(data); // log here
         })
         .catch(err => console.error(err));
     }
   }, [selectedTab]);
 
-  const handleSavePatient = ({firstname, lastname}) => {
+  const handleSavePatient = ({ firstname, lastname }) => {
     console.log(`Saving new patient: ${firstname} , ${lastname}`);
 
     axios.post('http://localhost:3000/patients', {
       firstname: firstname,
       lastname: lastname,
+      host: props.username,
     })
       .then(response => {
         setPatients([...patients, response.data]);
@@ -52,7 +54,6 @@ const Dashboard = (props) => {
     <div>
       <div className="banner">
         <h1>Welcome, {props.username}!</h1>
-        <p>This is your dashboard.</p>
       </div>
 
       <div className="tabs">
@@ -85,8 +86,9 @@ const Dashboard = (props) => {
             {!isAddingPatient && (
               <ul>
                 {patients.map(patient => (
-                  <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
-
+                  patient.host === props.username ? (
+                    <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
+                  ) : null // If host is not equal to props.username, don't render anything
                 ))}
               </ul>
             )}

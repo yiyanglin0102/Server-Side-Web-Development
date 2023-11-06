@@ -11,7 +11,7 @@ function Register(props) {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await register(userData);
+            await register(userData);
             setMessage("Registered successfully!");
             navigate('/login'); // Redirect to login page after successful registration
         } catch (error) {
