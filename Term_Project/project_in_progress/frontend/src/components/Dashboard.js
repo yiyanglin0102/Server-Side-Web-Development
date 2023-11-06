@@ -88,7 +88,7 @@ const Dashboard = (props) => {
                 {patients.map(patient => (
                   patient.host === props.username ? (
                     <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
-                  ) : null // If host is not equal to props.username, don't render anything
+                  ) : null 
                 ))}
               </ul>
             )}

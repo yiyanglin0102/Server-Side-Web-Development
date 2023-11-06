@@ -6,7 +6,7 @@ const AddPatientForm = ({ onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ firstname, lastname }); // Send as an object
+    onSave({ firstname, lastname });
     onClose();
   };
 
