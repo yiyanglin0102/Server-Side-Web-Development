@@ -1,34 +1,54 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const NewMail = ({ onSubmit, onCancel }) => {
+const NewMail = (props) => {
+  const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [content, setContent] = useState('');
+  const [mails, setMails] = useState([]);
 
-  const handleSubjectChange = (e) => {
-    setSubject(e.target.value);
-  };
-
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you would usually have logic to send the email...
-    onSubmit({ subject, content }); // For example, send this data back to the parent component or server
+    // onSubmit({ subject, content }); // For example, send this data back to the parent component or server
+
+    console.log(`Saving new mail: To: ${to}, ${subject} , ${content}`);
+    axios.post('http://localhost:3000/mails', {
+      from: props.username,
+      to: to,
+      title: subject,
+      content: content
+    })
+      .then(response => {
+        setMails([...mails, response.data]);
+        props.onCancel();
+      })
+      .catch(error => {
+        console.error("Error adding patient:", error);
+      });
   };
 
   return (
     <div>
       <h2>New Mail</h2>
       <form onSubmit={handleSubmit}>
+      <div>
+          <label htmlFor="to">To:</label>
+          <input
+            type="text"
+            id="to"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          />
+        </div>
         <div>
           <label htmlFor="subject">Subject:</label>
           <input
             type="text"
             id="subject"
             value={subject}
-            onChange={handleSubjectChange}
+            onChange={(e) => setSubject(e.target.value)}
           />
         </div>
         <div>
@@ -36,11 +56,12 @@ const NewMail = ({ onSubmit, onCancel }) => {
           <textarea
             id="content"
             value={content}
-            onChange={handleContentChange}
+            onChange={(e) => setContent(e.target.value)}
           />
         </div>
+        
         <button type="submit">Send Mail</button>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={props.onCancel}>Cancel</button>
       </form>
     </div>
   );

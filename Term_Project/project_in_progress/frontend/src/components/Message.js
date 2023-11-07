@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import NewMail from './NewMail';
 import Mailbox from './Mailbox';
+import axios from 'axios';
 
-const Message = ({ onClose, onSave }) => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
+const Message = (props) => {
+
   const [showingMailbox, setShowingMailbox] = useState(true); // true to show the Mailbox initially
 
   const handleNewMailClick = () => {
@@ -17,23 +17,31 @@ const Message = ({ onClose, onSave }) => {
     setShowingMailbox(true);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave({ firstname, lastname }); // Send as an object
-    onClose();
-    setShowingMailbox(true); // Switch back to the Mailbox after saving
+
+  const handleDeleteMail = (mailId, setMails) => {
+    console.log('Mail id:', mailId);
+    // Call API to delete the mail from the backend
+    // axios.delete(`/api/mails/${mailId}`)
+    //   .then(response => {
+    //     // If the delete was successful, filter out the deleted mail from the state
+    //     setMails(mails => mails.filter(mail => mail._id !== mailId));
+    //     console.log('Mail deleted:', response.data.message);
+    //   })
+    //   .catch(error => {
+    //     // Handle any errors during the delete request
+    //     console.error('Failed to delete mail:', error);
+    //   });
   };
 
   return (
     <div>
       {showingMailbox ? (
         <>
-          <Mailbox />
-          {/* Button to create new mail */}
           <button onClick={handleNewMailClick}>New Mail</button>
+          <Mailbox mails={props.mails} username={props.username} onDelete={handleDeleteMail} />
         </>
       ) : (
-        <NewMail onSubmit={handleSubmit} onCancel={handleMailboxClick} />
+        <NewMail onCancel={handleMailboxClick} username={props.username} />
       )}
     </div>
   );

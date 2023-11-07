@@ -17,9 +17,11 @@ router.get('/', async (req, res) => {
 
 // Endpoint to create a new patient
 router.post('/', async (req, res) => {
-    const { title, content } = req.body;
+    const { from, to, title, content } = req.body;
 
     const newMail = new Mail({
+        from,
+        to,
         title,
         content
     });
@@ -31,5 +33,19 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: err.message }); // Return error if any.
     }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const mail = await Mail.findById(req.params.id);
+        if (!mail) {
+            return res.status(404).json({ message: "Mail not found." });
+        }
+        await mail.remove(); // This deletes the document from the database
+        res.status(200).json({ message: "Mail deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 
 module.exports = router;

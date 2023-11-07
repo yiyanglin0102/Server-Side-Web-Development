@@ -1,36 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// Import the stylesheet for styling if you have one
 
-const Mailbox = () => {
-  const [emails, setEmails] = useState([]);
+const Mailbox = ({ mails, username, onDelete }) => {
+  const [selectedMail, setSelectedMail] = useState(null);
 
-  useEffect(() => {
-    // Here we'll use a function to simulate fetching data from a database.
-    // In a real app, you'd make an HTTP request to a backend service.
-    const fetchEmails = async () => {
-      try {
-        // Replace this URL with the endpoint for your backend service
-        const response = await fetch('/api/emails');
-        const data = await response.json();
-        setEmails(data); // Set the emails in state
-      } catch (error) {
-        console.error('Failed to fetch emails', error);
-      }
-    };
+  const handleMailClick = (mail) => {
+    setSelectedMail(selectedMail && selectedMail._id === mail._id ? null : mail);
+  };
 
-    fetchEmails();
-  }, []); // The empty array ensures this effect runs once on mount
+  // Handler for delete button
+  const handleDelete = (mailId, event) => {
+    event.stopPropagation(); // Prevent the mail click handler from firing
+    onDelete(mailId); // Call the onDelete function passed down from the parent component
+  };
 
   return (
     <div>
       <h2>Inbox</h2>
-      <ul>
-        {emails.map((email, index) => (
-          <li key={index}>
-            <div>Subject: {email.subject}</div>
-            <div>From: {email.from}</div>
-            {/* Display other email data as needed */}
-          </li>
-        ))}
+      <ul className="mail-list">
+        {mails.map((mail) => {
+          if (mail.to === username) {
+            return (
+              <li
+                key={mail._id}
+                onClick={() => handleMailClick(mail)}
+                className={selectedMail && selectedMail._id === mail._id ? 'selected-mail' : ''}
+              >
+                <div className="mail-subject">{mail.title}</div>
+                {selectedMail && selectedMail._id === mail._id && (
+                  <div className="mail-content">
+                    <div>From: {mail.from}</div>
+                    <div>Message: {mail.content}</div>
+                  </div>
+                )}
+                {/* Add a delete button for each mail */}
+                <button onClick={(event) => {handleDelete(mail._id, event); console.log(mail._id)}} className="delete-button">
+                  Delete
+                </button>
+              </li>
+            );
+          }
+          return null;
+        })}
       </ul>
     </div>
   );

@@ -106,12 +106,10 @@ const Dashboard = (props) => {
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
           </div>
         )}
-        {selectedTab === 'message' && <Message username={props.username} /> && <ul>
-          {mails.map(mail => (
-            <li key={mail.id}>{mail.title} {mail.content}</li>
-          )
-          )}
-        </ul>}
+        {selectedTab === 'message' && <Message username={props.username} mails={mails} />
+
+
+        }
       </div>
     </div>
   );
