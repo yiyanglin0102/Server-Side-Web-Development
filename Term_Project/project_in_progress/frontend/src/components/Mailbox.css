@@ -1,34 +1,52 @@
 /* Mailbox.css */
-
 .mail-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .mail-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .mail-list li:hover {
-    background-color: #f9f9f9;
-  }
-  
-  .mail-subject {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .mail-content {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-  }
-  
-  .selected-mail {
-    background-color: #e8e8e8;
-  }
-  
+  list-style-type: none;
+  padding: 0;
+}
+
+.mail-list li {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.mail-list li.selected-mail {
+  background-color: #eef;
+}
+
+.mail-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.mail-subject {
+  font-weight: bold;
+}
+
+.mail-content {
+  margin-top: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  float: right; /* Align the delete button to the right */
+}
+
+.delete-button:hover {
+  background-color: #ff3333;
+}
+
+/* Clear floats after the buttons */
+.mail-list li::after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './NewMail.css'; // Make sure the path to your CSS file is correct
 
 const NewMail = (props) => {
   const [to, setTo] = useState('');
@@ -30,10 +31,10 @@ const NewMail = (props) => {
   };
 
   return (
-    <div>
+    <div className="new-mail-container">
       <h2>New Mail</h2>
       <form onSubmit={handleSubmit}>
-      <div>
+        <div>
           <label htmlFor="to">To:</label>
           <input
             type="text"
@@ -59,7 +60,7 @@ const NewMail = (props) => {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        
+
         <button type="submit">Send Mail</button>
         <button type="button" onClick={props.onCancel}>Cancel</button>
       </form>

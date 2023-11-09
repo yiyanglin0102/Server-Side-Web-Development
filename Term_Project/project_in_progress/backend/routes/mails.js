@@ -37,10 +37,11 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const mail = await Mail.findById(req.params.id);
+        // console.log(mail);
         if (!mail) {
             return res.status(404).json({ message: "Mail not found." });
         }
-        await mail.remove(); // This deletes the document from the database
+        await Mail.deleteOne({ _id: req.params.id }); // Directly delete the document without fetching it
         res.status(200).json({ message: "Mail deleted successfully." });
     } catch (err) {
         res.status(500).json({ message: err.message });

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // Import the stylesheet for styling if you have one
+import './Mailbox.css'; // Import the stylesheet for styling
 
 const Mailbox = ({ mails, username, onDelete }) => {
   const [selectedMail, setSelectedMail] = useState(null);
@@ -34,7 +35,7 @@ const Mailbox = ({ mails, username, onDelete }) => {
                   </div>
                 )}
                 {/* Add a delete button for each mail */}
-                <button onClick={(event) => {handleDelete(mail._id, event); console.log(mail._id)}} className="delete-button">
+                <button onClick={(event) => { handleDelete(mail._id, event); console.log(mail._id) }} className="delete-button">
                   Delete
                 </button>
               </li>
