@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import EventPrompt from './EventPrompt';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
@@ -14,7 +14,7 @@ const EventScheduler = (props) => {
     const [selectedEvent, setSelectedEvent] = useState({ start: null, end: null });
     const username = props.username || "null";
 
-    useEffect(() => {
+    const fetchEvents = useCallback(() => {
         axios.get('http://localhost:3000/events')
             .then(response => {
                 const updatedEvents = response.data
@@ -31,16 +31,23 @@ const EventScheduler = (props) => {
             });
     }, [username]);
 
+    useEffect(() => {
+        fetchEvents();
+    }, [fetchEvents, username]);
+
     const handleSelect = ({ start, end }) => {
         setSelectedEvent({ start, end });
         setIsPromptOpen(true);
     };
 
+    const handleEventSelect = (event) => {
+        setSelectedEvent(event);
+        setIsPromptOpen(true);
+    };
+
     const handleEventSubmit = (formData) => {
         const { title, patient, content } = formData;
-        console.log(`User ${username} is adding a new event.`);
-
-        axios.post('http://localhost:3000/events', {
+        const eventPayload = {
             title,
             patient,
             content,
@@ -48,17 +55,34 @@ const EventScheduler = (props) => {
             allDay: false,
             start: moment(selectedEvent.start).tz(TIMEZONE).toISOString(),
             end: moment(selectedEvent.end).tz(TIMEZONE).toISOString()
-        })
+        };
+
+        const isNewEvent = !selectedEvent._id;
+        console.log(selectedEvent._id);
+        const endpoint = isNewEvent ?
+            'http://localhost:3000/events' :
+            `http://localhost:3000/events/${selectedEvent._id}`;
+        const method = isNewEvent ? axios.post : axios.put;
+
+        method(endpoint, eventPayload)
             .then(response => {
-                setEvents([...events, {
-                    ...response.data,
-                    start: moment.tz(response.data.start, TIMEZONE).toDate(),
-                    end: moment.tz(response.data.end, TIMEZONE).toDate()
-                }]);
+                if (isNewEvent) {
+                    setEvents([...events, {
+                        ...response.data,
+                        start: moment.tz(response.data.start, TIMEZONE).toDate(),
+                        end: moment.tz(response.data.end, TIMEZONE).toDate()
+                    }]);
+                } else {
+                    setEvents(events.map(event =>
+                        event.id === selectedEvent.id ? { ...response.data, start: moment.tz(response.data.start, TIMEZONE).toDate(), end: moment.tz(response.data.end, TIMEZONE).toDate() } : event
+                    ));
+                }
+                fetchEvents();
                 setIsPromptOpen(false);
+                setSelectedEvent({ start: null, end: null });
             })
             .catch(error => {
-                console.error("Error adding event:", error);
+                console.error(isNewEvent ? "Error adding event:" : "Error updating event:", error);
             });
     };
 
@@ -72,11 +96,13 @@ const EventScheduler = (props) => {
                 scrollToTime={new Date(1970, 1, 1, 6)}
                 defaultDate={new Date()}
                 onSelectSlot={handleSelect}
+                onSelectEvent={handleEventSelect}
             />
             <EventPrompt
                 isOpen={isPromptOpen}
                 onClose={() => setIsPromptOpen(false)}
                 onSubmit={handleEventSubmit}
+                eventData={selectedEvent} // Pass the selected event data to the prompt
             />
         </div>
     );

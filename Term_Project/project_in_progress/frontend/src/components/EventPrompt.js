@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const EventPrompt = ({ isOpen, onClose, onSubmit }) => {
+const EventPrompt = ({ isOpen, onClose, onSubmit, eventData }) => {
     const [title, setTitle] = useState('');
     const [patient, setPatient] = useState('');
     const [content, setContent] = useState('');
 
+    useEffect(() => {
+        // Populate the form with eventData when the prompt is opened for editing
+        if (eventData) {
+            setTitle(eventData.title || '');
+            setPatient(eventData.patient || '');
+            setContent(eventData.content || '');
+        } else {
+            // Reset the form when creating a new event
+            setTitle('');
+            setPatient('');
+            setContent('');
+        }
+    }, [eventData]);
+
     const handleSubmit = () => {
+        // console.log(eventData);
         onSubmit({ title, patient, content });
         onClose();
     };
