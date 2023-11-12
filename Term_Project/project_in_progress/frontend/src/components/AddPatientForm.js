@@ -4,10 +4,12 @@ const AddPatientForm = ({ onClose, onSave }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [birthdate, setBirthdate] = useState('');
+  const [sex, setSex] = useState('');
+  const [ethnicity, setEthnicity] = useState(''); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ firstname, lastname, birthdate });
+    onSave({ firstname, lastname, birthdate, sex, ethnicity });
     onClose();
   };
 
@@ -31,6 +33,26 @@ const AddPatientForm = ({ onClose, onSave }) => {
           value={birthdate}
           onChange={(e) => setBirthdate(e.target.value)}
         />
+        <select
+          value={sex}
+          onChange={(e) => setSex(e.target.value)}
+        >
+          <option value="">Select Sex</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <select
+          value={ethnicity}
+          onChange={(e) => setEthnicity(e.target.value)}
+        >
+          <option value="">Select Ethnicity</option>
+          <option value="Asian">Asian</option>
+          <option value="Black">Black</option>
+          <option value="Hispanic">Hispanic</option>
+          <option value="White">White</option>
+          <option value="Other">Other</option>
+        </select>
         <button type="submit">Save</button>
       </form>
       <button onClick={onClose}>Close</button>

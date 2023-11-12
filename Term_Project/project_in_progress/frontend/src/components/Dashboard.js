@@ -43,13 +43,15 @@ const Dashboard = (props) => {
     }
   }, [selectedTab]);
 
-  const handleSavePatient = ({ firstname, lastname, birthdate }) => {
-    console.log(`Saving new patient: ${birthdate} `);
+  const handleSavePatient = ({ firstname, lastname, birthdate, sex, ethnicity }) => {
+    console.log(`Saving new patient: ${ethnicity} `);
 
     axios.post('http://localhost:3000/patients', {
       firstname: firstname,
       lastname: lastname,
       birthdate: birthdate,
+      sex: sex,
+      ethnicity: ethnicity,
       host: props.username,
     })
       .then(response => {
@@ -99,11 +101,14 @@ const Dashboard = (props) => {
                 {patients.map(patient => (
                   patient.host === props.username ? (
                     <li key={patient._id}>
-                      {patient.firstname} {patient.lastname} {new Date(patient.birthdate).toLocaleDateString('en-US', {
+                      {patient.firstname} {patient.lastname} -
+                      Birthdate: {new Date(patient.birthdate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
-                      })}
+                      })} -
+                      Sex: {patient.sex ? patient.sex : "Not specified"} -
+                      Ethnicity: {patient.ethnicity ? patient.ethnicity : "Not specified"}
                     </li>
                   ) : null
                 ))}
@@ -113,10 +118,7 @@ const Dashboard = (props) => {
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
           </div>
         )}
-        {selectedTab === 'message' && <Message username={props.username} mails={mails} />
-
-
-        }
+        {selectedTab === 'message' && <Message username={props.username} mails={mails} />}
       </div>
     </div>
   );
