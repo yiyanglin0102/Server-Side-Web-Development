@@ -6,7 +6,7 @@ const patientSchema = new Schema({
     middleName: String,
     lastname: { type: String, required: true },
     host: { type: String, required: true },
-    // dob: { type: Date, required: true },
+    birthdate: { type: Date },
     // sex: { type: String, required: true },
     // ethnicity: String,
     // race: String,

@@ -43,12 +43,13 @@ const Dashboard = (props) => {
     }
   }, [selectedTab]);
 
-  const handleSavePatient = ({ firstname, lastname }) => {
-    console.log(`Saving new patient: ${firstname} , ${lastname}`);
+  const handleSavePatient = ({ firstname, lastname, birthdate }) => {
+    console.log(`Saving new patient: ${birthdate} `);
 
     axios.post('http://localhost:3000/patients', {
       firstname: firstname,
       lastname: lastname,
+      birthdate: birthdate,
       host: props.username,
     })
       .then(response => {
@@ -97,7 +98,13 @@ const Dashboard = (props) => {
               <ul>
                 {patients.map(patient => (
                   patient.host === props.username ? (
-                    <li key={patient._id}>{patient.firstname} {patient.lastname}</li>
+                    <li key={patient._id}>
+                      {patient.firstname} {patient.lastname} {new Date(patient.birthdate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </li>
                   ) : null
                 ))}
               </ul>

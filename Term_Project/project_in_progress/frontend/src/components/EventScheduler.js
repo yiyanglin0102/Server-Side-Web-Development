@@ -58,7 +58,6 @@ const EventScheduler = (props) => {
         };
 
         const isNewEvent = !selectedEvent._id;
-        console.log(selectedEvent._id);
         const endpoint = isNewEvent ?
             'http://localhost:3000/events' :
             `http://localhost:3000/events/${selectedEvent._id}`;

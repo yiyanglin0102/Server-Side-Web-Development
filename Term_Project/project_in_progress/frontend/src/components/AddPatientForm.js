@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 const AddPatientForm = ({ onClose, onSave }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ firstname, lastname });
+    onSave({ firstname, lastname, birthdate });
     onClose();
   };
 
@@ -24,6 +25,11 @@ const AddPatientForm = ({ onClose, onSave }) => {
           placeholder="Last Name"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
+        />
+        <input
+          type="date"
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
         />
         <button type="submit">Save</button>
       </form>
