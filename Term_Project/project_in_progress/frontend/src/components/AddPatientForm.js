@@ -5,11 +5,18 @@ const AddPatientForm = ({ onClose, onSave }) => {
   const [lastname, setLastname] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [sex, setSex] = useState('');
-  const [ethnicity, setEthnicity] = useState(''); 
+  const [ethnicity, setEthnicity] = useState('');
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ firstname, lastname, birthdate, sex, ethnicity });
+    onSave({ firstname, lastname, birthdate, sex, ethnicity, image });
     onClose();
   };
 
@@ -53,6 +60,12 @@ const AddPatientForm = ({ onClose, onSave }) => {
           <option value="White">White</option>
           <option value="Other">Other</option>
         </select>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+
         <button type="submit">Save</button>
       </form>
       <button onClick={onClose}>Close</button>

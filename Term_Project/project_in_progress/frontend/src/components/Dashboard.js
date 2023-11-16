@@ -12,6 +12,19 @@ const Dashboard = (props) => {
   const [mails, setMails] = useState([]);
   const [isAddingPatient, setIsAddingPatient] = useState(false);
 
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    return now.toLocaleString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+  };
+
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
   };
@@ -65,8 +78,10 @@ const Dashboard = (props) => {
 
   return (
     <div>
+
       <div className="banner">
         <h1>Welcome, {props.username}!</h1>
+        <p>{getCurrentDateTime()}</p>
       </div>
 
       <div className="tabs">

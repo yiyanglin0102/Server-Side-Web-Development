@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 // Endpoint to create a new patient
 router.post('/', async (req, res) => {
-    const { firstname, lastname, birthdate, sex, ethnicity, host } = req.body;
+    const { firstname, lastname, birthdate, sex, ethnicity, image, host } = req.body;
 
     const newPatient = new Patient({
         firstname,
@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
         birthdate,
         sex,
         ethnicity,
+        image,
         host,
     });
 
