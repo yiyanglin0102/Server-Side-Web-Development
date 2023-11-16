@@ -10,7 +10,6 @@ const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const userRoutes = require('./routes/users.js');
 const uploadsRoutes = require('./routes/uploads.js');
-const path = require('path');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

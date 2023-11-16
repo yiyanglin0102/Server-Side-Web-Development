@@ -1,40 +1,55 @@
-// uploads.js
 const express = require('express');
 const multer = require('multer');
-const { GridFsStorage } = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-// Since mongoose connection is already established in server.js, use it directly
-let gfs;
-mongoose.connection.once('open', () => {
-    // Init stream
-    gfs = Grid(mongoose.connection.db, mongoose.mongo);
-    gfs.collection('uploads');
+// Create a schema for storing images
+const imageSchema = new mongoose.Schema({
+  name: String,
+  data: Buffer,
+  contentType: String
 });
 
-// Create storage engine
-const storage = new GridFsStorage({
-    url: process.env.MONGO_URI,
-    file: (req, file) => {
-        return {
-            bucketName: 'uploads',
-            filename: file.originalname,
-        };
-    },
-});
+// Create a model
+const Image = mongoose.model('Image', imageSchema);
 
-const upload = multer({ storage });
+// Configure multer for file handling
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // POST endpoint for file upload
-router.post('/', upload.single('myfile'), (req, res) => {
+router.post('/', upload.single('myfile'), async (req, res) => {
     if (!req.file) {
         return res.status(400).send('No file uploaded.');
     }
 
-    console.log(req.file);
-    res.send('File uploaded successfully.');
+    // Create a new image document
+    const newImage = new Image({
+        name: req.file.originalname,
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+    });
+
+    // Save the image in MongoDB
+    const savedImage = await newImage.save();
+
+    // Respond with the URL to access the image
+    const fileUrl = `http://localhost:3001/uploads/${savedImage._id}`;
+    res.json({ fileUrl: fileUrl });
+});
+
+// GET endpoint to fetch an image
+router.get('/:id', async (req, res) => {
+    try {
+        const image = await Image.findById(req.params.id);
+        if (!image) {
+            return res.status(404).send('Image not found');
+        }
+        res.contentType(image.contentType);
+        res.send(image.data);
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
 });
 
 module.exports = router;
