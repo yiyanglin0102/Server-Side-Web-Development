@@ -6,19 +6,52 @@ const AddPatientForm = ({ onClose, onSave }) => {
   const [birthdate, setBirthdate] = useState('');
   const [sex, setSex] = useState('');
   const [ethnicity, setEthnicity] = useState('');
-  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setSelectedFile(file);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ firstname, lastname, birthdate, sex, ethnicity, image });
-    onClose();
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('myfile', selectedFile);
+
+    fetch('http://localhost:3000/uploads', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Now call onSave here, after the state has been updated
+        onSave({
+          firstname,
+          lastname,
+          birthdate,
+          sex,
+          ethnicity,
+          image_id: data.savedId // Pass the image_id directly from the response
+        });
+
+        // Close the form
+        onClose();
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+      });
   };
+
 
   return (
     <div>
@@ -60,12 +93,11 @@ const AddPatientForm = ({ onClose, onSave }) => {
           <option value="White">White</option>
           <option value="Other">Other</option>
         </select>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-
+        <br></br><br></br><br></br>
+        <br></br>
+        <input type="file" name="myfile" onChange={handleFileChange} />
+        {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '100px', height: 'auto' }} />}
+        <br></br><br></br><br></br>
         <button type="submit">Save</button>
       </form>
       <button onClick={onClose}>Close</button>

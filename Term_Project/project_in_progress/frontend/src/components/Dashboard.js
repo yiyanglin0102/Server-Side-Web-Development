@@ -42,7 +42,6 @@ const Dashboard = (props) => {
       fetchPatients()
         .then(data => {
           setPatients(data);
-          // console.log(data); // log here
         })
         .catch(err => console.error(err));
     }
@@ -50,30 +49,34 @@ const Dashboard = (props) => {
       fetchMails()
         .then(data => {
           setMails(data);
-          // console.log(data); // log here
         })
         .catch(err => console.error(err));
     }
   }, [selectedTab]);
 
-  const handleSavePatient = ({ firstname, lastname, birthdate, sex, ethnicity }) => {
-    console.log(`Saving new patient: ${ethnicity} `);
+  const handleSavePatient = async ({ firstname, lastname, birthdate, sex, ethnicity, image_id }) => {
+    console.log(`Saving new patient: ${image_id} `);
 
-    axios.post('http://localhost:3000/patients', {
-      firstname: firstname,
-      lastname: lastname,
-      birthdate: birthdate,
-      sex: sex,
-      ethnicity: ethnicity,
-      host: props.username,
-    })
-      .then(response => {
-        setPatients([...patients, response.data]);
-        setIsAddingPatient(false);
-      })
-      .catch(error => {
-        console.error("Error adding patient:", error);
+    try {
+      // Post patient data
+      const patientResponse = await axios.post('http://localhost:3000/patients', {
+        firstname: firstname,
+        lastname: lastname,
+        birthdate: birthdate,
+        sex: sex,
+        ethnicity: ethnicity,
+        host: props.username,
+        image_id: image_id,
       });
+
+      setPatients([...patients, patientResponse.data]);
+      setIsAddingPatient(false);
+
+
+    } catch (error) {
+      console.error("Error in processing:", error);
+      // Handle error
+    }
   };
 
   return (

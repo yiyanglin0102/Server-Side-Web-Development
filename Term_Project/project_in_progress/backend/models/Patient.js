@@ -9,6 +9,7 @@ const patientSchema = new Schema({
     birthdate: { type: Date },
     sex: { type: String, required: true },
     ethnicity: { type: String, required: true },
+    image_id: { type: String, required: false },
     // race: String,
     // preferredLanguage: String,
     // genderIdentity: String,
