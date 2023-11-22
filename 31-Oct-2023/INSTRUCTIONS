@@ -1,0 +1,9 @@
+INSTRUCTIONS
+
+Load and Duplicate (Optional)
+Optional Assignment
+Please note, requirements for the Node and PHP are exactly the same.
+1. NODE VERSION: (10 points)
+Create an HTML page that allows me to upload a file (any extension you want).   On the server, read in the file from a POST request.    Open the file and create a duplicate of it.   In the duplicate version of the source file,  append "This is a audit copy of the source document" to the BEGINNING of the duplicate file.
+2. PHP VERSION (10 points)
+Create an HTML page that allows me to upload a file (any extension you want).   On the server, read in the file from a POST request.    Open the file and create a duplicate of it.   In the duplicate version of the source file,  append "This is a audit copy of the source document" to the BEGINNING of the duplicate file.

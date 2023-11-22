@@ -1,0 +1,17 @@
+INSTRUCTIONS
+
+Complete the following using PDO with PHP (See attached for requirements and definitions) (10 Points)
+
+OR do both - PDO with PHP  (10 points) and Mongo with Node/Express (10 Points)
+
+BONUS: (10 Points)
+
+Create microservices (2) that can be used by  PHP and Node/Express.
+
+So, that means:
+
+1. 2 applications, one Node/Express based and one PHP/PDO based.
+
+2. both applications use the same Microservice(s)
+
+If you do all three, that will be 30 points total
