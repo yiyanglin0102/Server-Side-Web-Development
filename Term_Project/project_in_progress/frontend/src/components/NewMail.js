@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NewMail.css'; // Make sure the path to your CSS file is correct
+import './styles/NewMail.css'; // Make sure the path to your CSS file is correct
 
 const NewMail = (props) => {
   const [to, setTo] = useState('');

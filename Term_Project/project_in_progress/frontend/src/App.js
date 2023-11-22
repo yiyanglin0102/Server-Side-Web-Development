@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-ro
 import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import './components/styles/App.css';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

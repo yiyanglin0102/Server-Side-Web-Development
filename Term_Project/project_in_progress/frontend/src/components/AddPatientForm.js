@@ -62,17 +62,20 @@ const AddPatientForm = ({ onClose, onSave }) => {
           value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
         />
+        <br />
         <input
           type="text"
           placeholder="Last Name"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
         />
+        <br />
         <input
           type="date"
           value={birthdate}
           onChange={(e) => setBirthdate(e.target.value)}
         />
+        <br />
         <select
           value={sex}
           onChange={(e) => setSex(e.target.value)}
@@ -82,6 +85,7 @@ const AddPatientForm = ({ onClose, onSave }) => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
+        <br />
         <select
           value={ethnicity}
           onChange={(e) => setEthnicity(e.target.value)}
@@ -93,11 +97,12 @@ const AddPatientForm = ({ onClose, onSave }) => {
           <option value="White">White</option>
           <option value="Other">Other</option>
         </select>
-        <br></br><br></br><br></br>
-        <br></br>
+        <br />
+        <br />
         <input type="file" name="myfile" onChange={handleFileChange} />
         {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '100px', height: 'auto' }} />}
-        <br></br><br></br><br></br>
+        <br />
+        <br />
         <button type="submit">Save</button>
       </form>
       <button onClick={onClose}>Close</button>

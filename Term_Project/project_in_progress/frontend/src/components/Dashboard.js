@@ -5,7 +5,7 @@ import AddPatientForm from './AddPatientForm';
 import { fetchPatients } from '../api/patients';
 import { fetchMails } from '../api/mails';
 import axios from 'axios';
-import './Dashboard.css'; // Import the stylesheet for styling
+import './styles/Dashboard.css';
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
@@ -17,6 +17,8 @@ const Dashboard = (props) => {
   const [popupBirthdate, setBirthdate] = useState('');
   const [popupEthnicity, setEthnicity] = useState('');
   const [popupSex, setSex] = useState('');
+  const [popupFirstname, setFirstname] = useState('');
+  const [popupLastname, setLastname] = useState('');
 
 
   const getCurrentDateTime = () => {
@@ -86,6 +88,8 @@ const Dashboard = (props) => {
       .then(data => {
         setPopupImage(data);
         setShowPopup(true);
+        setFirstname(patient.firstname);
+        setLastname(patient.lastname);
         setBirthdate(patient.birthdate);
         setEthnicity(patient.ethnicity);
         setSex(patient.sex);
@@ -123,8 +127,6 @@ const Dashboard = (props) => {
                     <li key={patient._id} onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
                       {patient.firstname} {patient.lastname}
                       <br />
-                      {/* Sex: {patient.sex ? patient.sex : "Not specified"} */}
-                      {/* Ethnicity: {patient.ethnicity ? patient.ethnicity : "Not specified"} */}
                     </li>
                   ) : null
                 ))}
@@ -134,6 +136,8 @@ const Dashboard = (props) => {
               <div className="popup">
                 <img src={popupImage} alt="Patient" style={{ maxWidth: '200px', maxHeight: '200px' }} />
                 <br />
+                First Name : {popupFirstname} <br />
+                Last Name : {popupLastname} <br />
                 Birthdate : {new Date(popupBirthdate).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
