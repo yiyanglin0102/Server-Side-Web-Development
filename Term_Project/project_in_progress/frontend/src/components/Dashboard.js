@@ -14,6 +14,10 @@ const Dashboard = (props) => {
   const [isAddingPatient, setIsAddingPatient] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [popupImage, setPopupImage] = useState('');
+  const [popupBirthdate, setBirthdate] = useState('');
+  const [popupEthnicity, setEthnicity] = useState('');
+  const [popupSex, setSex] = useState('');
+
 
   const getCurrentDateTime = () => {
     const now = new Date();
@@ -76,12 +80,15 @@ const Dashboard = (props) => {
     }
   };
 
-  const handleHover = (imageId) => {
-    fetch(`http://localhost:3000/patients/${imageId}`)
+  const handleHover = (patient) => {
+    fetch(`http://localhost:3000/patients/${patient.image_id}`)
       .then(response => response.text())
       .then(data => {
         setPopupImage(data);
         setShowPopup(true);
+        setBirthdate(patient.birthdate);
+        setEthnicity(patient.ethnicity);
+        setSex(patient.sex);
       })
       .catch(err => console.error(err));
   };
@@ -113,15 +120,11 @@ const Dashboard = (props) => {
               <ul>
                 {patients.map(patient => (
                   patient.host === props.username ? (
-                    <li key={patient._id} onMouseEnter={() => handleHover(patient.image_id)} onMouseLeave={handleMouseLeave}>
+                    <li key={patient._id} onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
                       {patient.firstname} {patient.lastname}
-                      Birthdate: {new Date(patient.birthdate).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                      Sex: {patient.sex ? patient.sex : "Not specified"}
-                      Ethnicity: {patient.ethnicity ? patient.ethnicity : "Not specified"}
+                      <br />
+                      {/* Sex: {patient.sex ? patient.sex : "Not specified"} */}
+                      {/* Ethnicity: {patient.ethnicity ? patient.ethnicity : "Not specified"} */}
                     </li>
                   ) : null
                 ))}
@@ -130,6 +133,15 @@ const Dashboard = (props) => {
             {showPopup && (
               <div className="popup">
                 <img src={popupImage} alt="Patient" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                <br />
+                Birthdate : {new Date(popupBirthdate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+                <br />
+                Ethnicity :  {popupEthnicity} <br />
+                Sex : {popupSex}
               </div>
             )}
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
