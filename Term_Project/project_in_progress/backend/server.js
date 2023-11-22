@@ -39,4 +39,3 @@ app.use('/events', eventsRouter);
 app.use('/patients', patientsRouter);
 app.use('/mails', mailsRouter);
 app.use('/uploads', uploadsRouter);
-

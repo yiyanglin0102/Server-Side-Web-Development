@@ -5,12 +5,15 @@ import AddPatientForm from './AddPatientForm';
 import { fetchPatients } from '../api/patients';
 import { fetchMails } from '../api/mails';
 import axios from 'axios';
+import './Dashboard.css'; // Import the stylesheet for styling
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
   const [patients, setPatients] = useState([]);
   const [mails, setMails] = useState([]);
   const [isAddingPatient, setIsAddingPatient] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupImage, setPopupImage] = useState('');
 
   const getCurrentDateTime = () => {
     const now = new Date();
@@ -55,57 +58,49 @@ const Dashboard = (props) => {
   }, [selectedTab]);
 
   const handleSavePatient = async ({ firstname, lastname, birthdate, sex, ethnicity, image_id }) => {
-    console.log(`Saving new patient: ${image_id} `);
-
     try {
-      // Post patient data
       const patientResponse = await axios.post('http://localhost:3000/patients', {
-        firstname: firstname,
-        lastname: lastname,
-        birthdate: birthdate,
-        sex: sex,
-        ethnicity: ethnicity,
+        firstname,
+        lastname,
+        birthdate,
+        sex,
+        ethnicity,
         host: props.username,
-        image_id: image_id,
+        image_id,
       });
 
       setPatients([...patients, patientResponse.data]);
       setIsAddingPatient(false);
-
-
     } catch (error) {
       console.error("Error in processing:", error);
-      // Handle error
     }
+  };
+
+  const handleHover = (imageId) => {
+    fetch(`http://localhost:3000/patients/${imageId}`)
+      .then(response => response.text())
+      .then(data => {
+        setPopupImage(data);
+        setShowPopup(true);
+      })
+      .catch(err => console.error(err));
+  };
+
+  const handleMouseLeave = () => {
+    setShowPopup(false);
   };
 
   return (
     <div>
-
       <div className="banner">
         <h1>Welcome, {props.username}!</h1>
         <p>{getCurrentDateTime()}</p>
       </div>
 
       <div className="tabs">
-        <button
-          className={`tab-button ${selectedTab === 'scheduler' ? 'active' : ''}`}
-          onClick={() => handleTabChange('scheduler')}
-        >
-          Scheduler
-        </button>
-        <button
-          className={`tab-button ${selectedTab === 'patient' ? 'active' : ''}`}
-          onClick={() => handleTabChange('patient')}
-        >
-          Patient
-        </button>
-        <button
-          className={`tab-button ${selectedTab === 'message' ? 'active' : ''}`}
-          onClick={() => handleTabChange('message')}
-        >
-          Message
-        </button>
+        <button className={`tab-button ${selectedTab === 'scheduler' ? 'active' : ''}`} onClick={() => handleTabChange('scheduler')}>Scheduler</button>
+        <button className={`tab-button ${selectedTab === 'patient' ? 'active' : ''}`} onClick={() => handleTabChange('patient')}>Patient</button>
+        <button className={`tab-button ${selectedTab === 'message' ? 'active' : ''}`} onClick={() => handleTabChange('message')}>Message</button>
       </div>
 
       <div className="tab-content">
@@ -113,26 +108,30 @@ const Dashboard = (props) => {
         {selectedTab === 'patient' && (
           <div>
             <h2>Patient Details</h2>
-            {!isAddingPatient && (<button onClick={handleAddPatient}>Add New Patient</button>)}
+            {!isAddingPatient && <button onClick={handleAddPatient}>Add New Patient</button>}
             {!isAddingPatient && (
               <ul>
                 {patients.map(patient => (
                   patient.host === props.username ? (
-                    <li key={patient._id}>
-                      {patient.firstname} {patient.lastname} -
+                    <li key={patient._id} onMouseEnter={() => handleHover(patient.image_id)} onMouseLeave={handleMouseLeave}>
+                      {patient.firstname} {patient.lastname}
                       Birthdate: {new Date(patient.birthdate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
-                      })} -
-                      Sex: {patient.sex ? patient.sex : "Not specified"} -
+                      })}
+                      Sex: {patient.sex ? patient.sex : "Not specified"}
                       Ethnicity: {patient.ethnicity ? patient.ethnicity : "Not specified"}
                     </li>
                   ) : null
                 ))}
               </ul>
             )}
-
+            {showPopup && (
+              <div className="popup">
+                <img src={popupImage} alt="Patient" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+              </div>
+            )}
             {isAddingPatient && <AddPatientForm onClose={handleCloseForm} onSave={handleSavePatient} />}
           </div>
         )}
@@ -140,6 +139,6 @@ const Dashboard = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

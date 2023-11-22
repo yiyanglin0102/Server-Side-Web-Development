@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const event = await Event.findById(req.params.id);
-        console.log(event);
+        // console.log(event);
         if (!event) {
             return res.status(404).json({ message: 'Event not found' });
         }
