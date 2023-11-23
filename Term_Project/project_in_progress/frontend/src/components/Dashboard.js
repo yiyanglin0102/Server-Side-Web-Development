@@ -6,7 +6,7 @@ import { fetchPatients } from '../api/patients';
 import { fetchMails } from '../api/mails';
 import axios from 'axios';
 import './styles/Dashboard.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate instead of useHistory
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
@@ -47,6 +47,17 @@ const Dashboard = (props) => {
   const handleCloseForm = () => {
     setIsAddingPatient(false);
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check URL query parameters
+    const queryParams = new URLSearchParams(location.search);
+    const tab = queryParams.get('tab');
+    if (tab) {
+      setSelectedTab(tab);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (selectedTab === 'patient') {
@@ -131,7 +142,7 @@ const Dashboard = (props) => {
                 {patients.map(patient => (
                   patient.host === props.username ? (
                     <li key={patient._id} >
-                      <button onClick={() => {handleEditPatientClick(patient._id); console.log(patient._id)}}
+                      <button onClick={() => { handleEditPatientClick(patient._id); console.log(patient._id) }}
                         onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
                         {patient.firstname} {patient.lastname}
                         <br />

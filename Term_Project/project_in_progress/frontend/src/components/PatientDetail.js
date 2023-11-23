@@ -1,17 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Modal from './modal';
+
+const formatMongoDateForInput = (mongoDate) => {
+    if (!mongoDate) return '';
+
+    // Convert to a JavaScript Date object
+    const date = new Date(mongoDate);
+
+    // Extract year, month, and day
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // January is 0
+    const day = date.getDate().toString().padStart(2, '0');
+
+    // Format to yyyy-MM-dd
+    return `${year}-${month}-${day}`;
+};
 
 const PatientDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+
     const [patient, setPatient] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
 
     useEffect(() => {
         const fetchPatient = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/patients/${id}`);
-                setPatient(response.data);
+                const fetchedPatient = response.data;
+
+                // Format the date
+                if (fetchedPatient.birthdate) {
+                    fetchedPatient.birthdate = formatMongoDateForInput(fetchedPatient.birthdate);
+                }
+
+                setPatient(fetchedPatient);
             } catch (error) {
                 console.error("Error fetching patient data:", error);
             } finally {
@@ -28,15 +56,27 @@ const PatientDetail = () => {
     };
 
     const handleSubmit = async (event) => {
-        //     event.preventDefault();
-        //     try {
-        //         await axios.put(`/patients/${id}`, patient);
-        //         // Handle success (e.g., show a success message or redirect)
-        //     } catch (error) {
-        //         console.error("Error updating patient:", error);
-        //         // Handle error (e.g., show error message)
-        //     }
+        event.preventDefault();
+        try {
+            await axios.put(`http://localhost:3000/patients/${id}`, patient);
+            setSuccessMessage('Patient updated successfully!');
+            setShowModal(true); // Show the modal on successful update
+        } catch (error) {
+            console.error("Error updating patient:", error);
+            setSuccessMessage('Failed to update patient.');
+            setShowModal(true); // Optionally show the modal even on failure
+        }
     };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        navigate(-1);
+    };
+
+    const handleCancelEdit = () => {
+        navigate('/dashboard?tab=patient');
+    };
+
 
     if (loading) {
         return <div>Loading...</div>;
@@ -49,22 +89,52 @@ const PatientDetail = () => {
     return (
         <div>
             <h1>Edit Patient Information</h1>
+            {successMessage && <div className="success-message">{successMessage}</div>}
+
             <form onSubmit={handleSubmit}>
                 <label>
                     First Name:
-                    <input type="text" name="firstname"
-                        value={patient.firstname}
-                        onChange={handleInputChange} />
+                    <input type="text" name="firstname" value={patient.firstname} onChange={handleInputChange} />
                 </label>
                 <br />
                 <label>
                     Last Name:
-                    <input type="text" name="firstname"
-                        value={patient.lastname}
-                        onChange={handleInputChange} />
+                    <input type="text" name="lastname" value={patient.lastname} onChange={handleInputChange} />
+                </label>
+                <br />
+                <label>
+                    Birthdate:
+                    <input type="date" name="birthdate" value={patient.birthdate} onChange={handleInputChange} />
+                </label>
+                <br />
+                <label>
+                    Sex:
+                    <select name="sex" value={patient.sex} onChange={handleInputChange}>
+                        <option value="">Select Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+                <br />
+                <label>
+                    Ethnicity:
+                    <select name="ethnicity" value={patient.ethnicity} onChange={handleInputChange}>
+                        <option value="">Select Ethnicity</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Black">Black</option>
+                        <option value="Hispanic">Hispanic</option>
+                        <option value="White">White</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </label>
                 <br />
                 <button type="submit">Save Changes</button>
+                <button type="button" onClick={handleCancelEdit}>Cancel Edit</button>
+                <Modal show={showModal} onClose={handleCloseModal}>
+                    <p>{successMessage}</p>
+                </Modal>
+
             </form>
         </div>
     );
