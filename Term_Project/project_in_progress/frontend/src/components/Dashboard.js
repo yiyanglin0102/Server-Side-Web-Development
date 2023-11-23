@@ -6,6 +6,7 @@ import { fetchPatients } from '../api/patients';
 import { fetchMails } from '../api/mails';
 import axios from 'axios';
 import './styles/Dashboard.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
@@ -19,6 +20,7 @@ const Dashboard = (props) => {
   const [popupSex, setSex] = useState('');
   const [popupFirstname, setFirstname] = useState('');
   const [popupLastname, setLastname] = useState('');
+  const navigate = useNavigate(); // Hook for navigation
 
 
   const getCurrentDateTime = () => {
@@ -83,7 +85,7 @@ const Dashboard = (props) => {
   };
 
   const handleHover = (patient) => {
-    fetch(`http://localhost:3000/patients/${patient.image_id}`)
+    fetch(`http://localhost:3000/images/${patient.image_id}`)
       .then(response => response.text())
       .then(data => {
         setPopupImage(data);
@@ -99,6 +101,10 @@ const Dashboard = (props) => {
 
   const handleMouseLeave = () => {
     setShowPopup(false);
+  };
+
+  const handleEditPatientClick = (patientId) => {
+    navigate(`/patient/${patientId}`); // Navigate to edit form page with patientId
   };
 
   return (
@@ -124,9 +130,12 @@ const Dashboard = (props) => {
               <ul>
                 {patients.map(patient => (
                   patient.host === props.username ? (
-                    <li key={patient._id} onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
-                      {patient.firstname} {patient.lastname}
-                      <br />
+                    <li key={patient._id} >
+                      <button onClick={() => {handleEditPatientClick(patient._id); console.log(patient._id)}}
+                        onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
+                        {patient.firstname} {patient.lastname}
+                        <br />
+                      </button>
                     </li>
                   ) : null
                 ))}
@@ -153,7 +162,7 @@ const Dashboard = (props) => {
         )}
         {selectedTab === 'message' && <Message username={props.username} mails={mails} />}
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -29,18 +29,38 @@ router.post('/', upload.single('myfile'), async (req, res) => {
     res.json({ savedId: savedId });
 });
 
-// GET endpoint to fetch an image
+// // GET endpoint to fetch an image
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const image = await Image.findById(req.params.id);
+//         if (!image) {
+//             return res.status(404).send('Image not found');
+//         }
+//         res.contentType(image.contentType);
+//         res.send(image.data);
+//     } catch (error) {
+//         res.status(500).send('Server error');
+//     }
+// });
+
+// hover images
 router.get('/:id', async (req, res) => {
     try {
         const image = await Image.findById(req.params.id);
-        if (!image) {
-            return res.status(404).send('Image not found');
+        // console.log("Requested image ID:", req.params.id); // Debug log
+
+        if (image) {
+            const imgBase64 = Buffer.from(image.data).toString('base64');
+            const imgSrc = `data:${image.contentType};base64,${imgBase64}`;
+            res.send(imgSrc); // Send the actual image data
+        } else {
+            res.status(404).send('No images found123');
         }
-        res.contentType(image.contentType);
-        res.send(image.data);
-    } catch (error) {
-        res.status(500).send('Server error');
+    } catch (err) {
+        console.error("Error fetching image:", err); // Debug log
+        res.status(500).json({ message: err.message });
     }
 });
+
 
 module.exports = router;

@@ -8,7 +8,7 @@ const patientsRouter = require('./routes/patients');
 const mailsRouter = require('./routes/mails');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
-const uploadsRouter = require('./routes/uploads');
+const imagesRouter = require('./routes/images');
 
 require('dotenv').config();
 
@@ -38,4 +38,4 @@ app.use('/login', loginRouter);
 app.use('/events', eventsRouter);
 app.use('/patients', patientsRouter);
 app.use('/mails', mailsRouter);
-app.use('/uploads', uploadsRouter);
+app.use('/images', imagesRouter);

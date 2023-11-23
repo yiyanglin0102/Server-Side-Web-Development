@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-ro
 import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import PatientDetail from './components/PatientDetail';
 import './components/styles/App.css';
 
 
@@ -50,6 +51,8 @@ function App() {
           <Route path="/login" element={<Login onLoginSuccess={(user) => { setIsAuthenticated(true); setUsername(user); }} />} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard username={username} /> : <Navigate to="/login" />} />
           <Route path="/" element={<Home />} />
+          <Route path="/patient/:id" element={<PatientDetail />}  />
+          
         </Routes>
       </div>
     </Router>

@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Mail = require('../models/Mail'); // Importing the Patient model to interact with the database.
 
-// Endpoint to fetch all patients
+// Endpoint to fetch all mails
 router.get('/', async (req, res) => {
     try {
         const mails = await Mail.find(); // Fetch all patients from the database.

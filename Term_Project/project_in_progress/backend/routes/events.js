@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     try {
         const events = await Event.find(); // Fetch all events from the database.
         res.json(events);
-        console.log(events)
+        // console.log(events)
     } catch (err) {
         res.status(500).json({ message: err.message }); // Return error if any.
     }

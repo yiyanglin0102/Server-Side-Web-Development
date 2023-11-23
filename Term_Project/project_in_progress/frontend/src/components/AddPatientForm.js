@@ -28,7 +28,7 @@ const AddPatientForm = ({ onClose, onSave }) => {
     const formData = new FormData();
     formData.append('myfile', selectedFile);
 
-    fetch('http://localhost:3000/uploads', {
+    fetch('http://localhost:3000/images', {
       method: 'POST',
       body: formData,
     })

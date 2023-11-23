@@ -32,27 +32,49 @@ router.post('/', async (req, res) => {
     });
 
     try {
+        // console.log(savedPatient);
         const savedPatient = await newPatient.save(); // Save the new event to the database.
         res.status(201).json(savedPatient); // Return the saved event data.
     } catch (err) {
         res.status(400).json({ message: err.message }); // Return error if any.
     }
 });
+
 router.get('/:id', async (req, res) => {
     try {
-        const image = await Image.findById(req.params.id);
-        // console.log("Requested image ID:", req.params.id); // Debug log
-
-        if (image) {
-            const imgBase64 = Buffer.from(image.data).toString('base64');
-            const imgSrc = `data:${image.contentType};base64,${imgBase64}`;
-            res.send(imgSrc); // Send the actual image data
-        } else {
-            res.status(404).send('No images found');
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({ message: 'Patient not found' });
         }
+        // console.log(patient);
+        res.json(patient);
     } catch (err) {
-        console.error("Error fetching image:", err); // Debug log
+        console.error("Error fetching patient:", err);
         res.status(500).json({ message: err.message });
+    }
+});
+
+// Endpoint to update an existing patient
+router.put('/:id', async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({ message: 'Patient not found' });
+        }
+
+        // Update patient properties with request data
+        patient.firstname = req.body.firstname || patient.firstname;
+        patient.lastname = req.body.lastname || patient.lastname;
+        patient.birthdate = req.body.birthdate || patient.birthdate;
+        patient.sex = req.body.sex || patient.sex;
+        patient.ethnicity = req.body.ethnicity || patient.ethnicity;
+        patient.image_id = req.body.image_id || patient.image_id;
+
+        const updatedPatient = await patient.save();
+        res.json(updatedPatient);
+
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
 });
 
