@@ -78,4 +78,17 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const mail = await Patient.findById(req.params.id);
+        if (!mail) {
+            return res.status(404).json({ message: "Patient not found." });
+        }
+        await Patient.deleteOne({ _id: req.params.id }); // Directly delete the document without fetching it
+        res.status(200).json({ message: "Patient deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;

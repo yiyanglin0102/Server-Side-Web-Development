@@ -115,13 +115,34 @@ const PatientDetail = () => {
 
     const handleCloseModal = () => {
         setShowModal(false);
-        navigate(-1);
+        navigate('/dashboard?tab=patient');
     };
 
     const handleCancelEdit = () => {
         navigate('/dashboard?tab=patient');
     };
 
+    const handleDelete = async () => {
+        let imageId = patient.image_id; // Assuming 'image_id' is the field in your patient object
+
+
+        try {
+            await axios.delete(`http://localhost:3000/images/${imageId}`);
+        } catch (error) {
+            console.error('Error deleting image:', error);
+            return; // Exit the function if the image upload fails
+        }
+
+
+        try {
+            await axios.delete(`http://localhost:3000/patients/${id}`);
+            setSuccessMessage('Patient deleted successfully!');
+        } catch (error) {
+            console.error("Error updating patient:", error);
+            setSuccessMessage('Failed to update patient.');
+        }
+        setShowModal(true);
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -178,8 +199,11 @@ const PatientDetail = () => {
                     </select>
                 </label>
                 <br />
+
                 <button type="submit">Save Changes</button>
                 <button type="button" onClick={handleCancelEdit}>Cancel Edit</button>
+                <button type="button" onClick={handleDelete}>Delete Patient</button>
+
                 <Modal show={showModal} onClose={handleCloseModal}>
                     <p>{successMessage}</p>
                 </Modal>

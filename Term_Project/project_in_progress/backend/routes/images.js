@@ -29,20 +29,6 @@ router.post('/', upload.single('myfile'), async (req, res) => {
     res.json({ savedId: savedId });
 });
 
-// // GET endpoint to fetch an image
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const image = await Image.findById(req.params.id);
-//         if (!image) {
-//             return res.status(404).send('Image not found');
-//         }
-//         res.contentType(image.contentType);
-//         res.send(image.data);
-//     } catch (error) {
-//         res.status(500).send('Server error');
-//     }
-// });
-
 // hover images
 router.get('/:id', async (req, res) => {
     try {
@@ -62,5 +48,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const image = await Image.findById(req.params.id);
+        if (!image) {
+            return res.status(404).json({ message: "Patient not found." });
+        }
+        await Image.deleteOne({ _id: req.params.id }); // Directly delete the document without fetching it
+        res.status(200).json({ message: "Image deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 module.exports = router;
