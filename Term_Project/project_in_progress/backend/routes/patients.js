@@ -68,7 +68,7 @@ router.put('/:id', async (req, res) => {
         patient.birthdate = req.body.birthdate || patient.birthdate;
         patient.sex = req.body.sex || patient.sex;
         patient.ethnicity = req.body.ethnicity || patient.ethnicity;
-        // patient.image_id = req.body.image_id || patient.image_id;
+        patient.image_id = req.body.image_id || patient.image_id;
 
         const updatedPatient = await patient.save();
         res.json(updatedPatient);

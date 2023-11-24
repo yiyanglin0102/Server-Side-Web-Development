@@ -139,17 +139,27 @@ const Dashboard = (props) => {
             {!isAddingPatient && <button onClick={handleAddPatient}>Add New Patient</button>}
             {!isAddingPatient && (
               <ul>
-                {patients.map(patient => (
-                  patient.host === props.username ? (
-                    <li key={patient._id} >
-                      <button onClick={() => { handleEditPatientClick(patient._id); console.log(patient._id) }}
-                        onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
-                        {patient.firstname} {patient.lastname}
-                        <br />
-                      </button>
-                    </li>
-                  ) : null
-                ))}
+                {patients
+                  .sort((a, b) => {
+                    // Compare by first name, then by last name if first names are the same
+                    let nameA = a.firstname.toLowerCase() + a.lastname.toLowerCase();
+                    let nameB = b.firstname.toLowerCase() + b.lastname.toLowerCase();
+                    if (nameA < nameB) return -1;
+                    if (nameA > nameB) return 1;
+                    return 0;
+                  })
+                  .map(patient => (
+                    patient.host === props.username ? (
+                      <li key={patient._id}>
+                        <button onClick={() => handleEditPatientClick(patient._id)}
+                          onMouseEnter={() => handleHover(patient)} onMouseLeave={handleMouseLeave}>
+                          {patient.firstname} {patient.lastname}
+                          <br />
+                        </button>
+                      </li>
+                    ) : null
+                  ))
+                }
               </ul>
             )}
             {showPopup && (

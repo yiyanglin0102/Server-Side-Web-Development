@@ -26,6 +26,8 @@ const PatientDetail = () => {
     const [loading, setLoading] = useState(true);
     const [successMessage, setSuccessMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [imagePreview, setImagePreview] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
 
 
     useEffect(() => {
@@ -34,12 +36,20 @@ const PatientDetail = () => {
                 const response = await axios.get(`http://localhost:3000/patients/${id}`);
                 const fetchedPatient = response.data;
 
-                // Format the date
                 if (fetchedPatient.birthdate) {
                     fetchedPatient.birthdate = formatMongoDateForInput(fetchedPatient.birthdate);
                 }
 
                 setPatient(fetchedPatient);
+
+                if (fetchedPatient.image_id) {
+                    try {
+                        const imgResponse = await axios.get(`http://localhost:3000/images/${fetchedPatient.image_id}`);
+                        setImagePreview(imgResponse.data);
+                    } catch (error) {
+                        console.error("Error fetching image:", error);
+                    }
+                }
             } catch (error) {
                 console.error("Error fetching patient data:", error);
             } finally {
@@ -50,6 +60,7 @@ const PatientDetail = () => {
         fetchPatient();
     }, [id]);
 
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setPatient({ ...patient, [name]: value });
@@ -57,14 +68,48 @@ const PatientDetail = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        let imageId = patient.image_id; // Assuming 'image_id' is the field in your patient object
+
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('myfile', selectedFile);
+
+            try {
+                const response = await fetch('http://localhost:3000/images', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                imageId = data.savedId; // Update the imageId with the new one
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                return; // Exit the function if the image upload fails
+            }
+        }
+
         try {
-            await axios.put(`http://localhost:3000/patients/${id}`, patient);
+            const updatedPatient = { ...patient, image_id: imageId };
+            await axios.put(`http://localhost:3000/patients/${id}`, updatedPatient);
             setSuccessMessage('Patient updated successfully!');
             setShowModal(true); // Show the modal on successful update
         } catch (error) {
             console.error("Error updating patient:", error);
             setSuccessMessage('Failed to update patient.');
             setShowModal(true); // Optionally show the modal even on failure
+        }
+    };
+
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+            setSelectedFile(file);
         }
     };
 
@@ -92,6 +137,10 @@ const PatientDetail = () => {
             {successMessage && <div className="success-message">{successMessage}</div>}
 
             <form onSubmit={handleSubmit}>
+                {imagePreview && <img src={imagePreview} alt="Patient" style={{ width: '100px', height: 'auto' }} />}
+                <br />
+                <input type="file" name="myfile" onChange={handleFileChange} />
+                <br />
                 <label>
                     First Name:
                     <input type="text" name="firstname" value={patient.firstname} onChange={handleInputChange} />
