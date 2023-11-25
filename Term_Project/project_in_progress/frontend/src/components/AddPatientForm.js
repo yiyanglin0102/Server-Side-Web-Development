@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles/AddPatientForm.css';
 
 const AddPatientForm = ({ onClose, onSave }) => {
   const [firstname, setFirstname] = useState('');
@@ -54,8 +55,8 @@ const AddPatientForm = ({ onClose, onSave }) => {
 
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="add-patient-form-container">
+      <form onSubmit={handleSubmit} className="add-patient-form">
         <input
           type="text"
           placeholder="First Name"
@@ -100,13 +101,18 @@ const AddPatientForm = ({ onClose, onSave }) => {
         <br />
         <br />
         <input type="file" name="myfile" onChange={handleFileChange} />
-        {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '100px', height: 'auto' }} />}
-        <br />
-        <br />
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="image-preview"
+          />
+        )}
         <button type="submit">Save</button>
+        <button type="button" onClick={onClose} className="close-button">Close</button>
       </form>
-      <button onClick={onClose}>Close</button>
     </div>
+
   );
 };
 

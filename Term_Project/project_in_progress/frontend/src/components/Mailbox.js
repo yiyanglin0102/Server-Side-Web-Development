@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// Import the stylesheet for styling if you have one
-import './styles/Mailbox.css'; // Import the stylesheet for styling
+import './styles/Mailbox.css';
 
 const Mailbox = ({ mails, username, onDelete }) => {
   const [selectedMail, setSelectedMail] = useState(null);

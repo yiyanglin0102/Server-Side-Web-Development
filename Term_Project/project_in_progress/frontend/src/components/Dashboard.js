@@ -6,7 +6,7 @@ import { fetchPatients } from '../api/patients';
 import { fetchMails } from '../api/mails';
 import axios from 'axios';
 import './styles/Dashboard.css';
-import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Dashboard = (props) => {
   const [selectedTab, setSelectedTab] = useState('scheduler');
@@ -20,7 +20,7 @@ const Dashboard = (props) => {
   const [popupSex, setSex] = useState('');
   const [popupFirstname, setFirstname] = useState('');
   const [popupLastname, setLastname] = useState('');
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
 
   const getCurrentDateTime = () => {
@@ -115,7 +115,7 @@ const Dashboard = (props) => {
   };
 
   const handleEditPatientClick = (patientId) => {
-    navigate(`/patient/${patientId}`); // Navigate to edit form page with patientId
+    navigate(`/patient/${patientId}`);
   };
 
   return (

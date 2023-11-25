@@ -1,0 +1,64 @@
+.add-patient-form-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-patient-form input[type="text"],
+.add-patient-form input[type="date"],
+.add-patient-form select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.add-patient-form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add-patient-form button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-patient-form button[type="button"] {
+  background-color: #dc3545;
+  color: white;
+}
+
+.image-preview {
+  width: 100px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.add-patient-form button.close-button {
+  background-color: #6c757d; /* Gray background */
+  color: white; /* White text */
+  padding: 10px 15px; /* Padding */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+  font-size: 16px; /* Font size */
+  margin-top: 10px; /* Margin at the top */
+  transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+.add-patient-form button.close-button:hover {
+  background-color: #5a6268; /* Slightly darker gray on hover */
+}

@@ -1,6 +1,6 @@
 .patient-detail {
     background-color: #fff;
-    padding: 20px;
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-width: 600px;
@@ -65,3 +65,14 @@
     text-align: center;
 }
 
+.patient-detail button.cancel-edit-button {
+    background-color: #6c757d; /* Gray background for 'Cancel' action */
+    color: white; /* White text */
+    padding: 10px 15px; /* Padding */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: 16px; /* Font size */
+    margin-top: 10px; /* Margin at the top */
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}

@@ -1,4 +1,3 @@
-// Existing App.js code
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import Register from './components/Register';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
-import './styles/PatientDetail.css'; // Adjust the path as per your directory structure
+import './styles/PatientDetail.css';
 
 const formatMongoDateForInput = (mongoDate) => {
     if (!mongoDate) return '';
@@ -70,7 +70,7 @@ const PatientDetail = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        let imageId = patient.image_id; // Assuming 'image_id' is the field in your patient object
+        let imageId = patient.image_id;
 
         if (selectedFile) {
             const formData = new FormData();
@@ -124,7 +124,7 @@ const PatientDetail = () => {
     };
 
     const handleDelete = async () => {
-        let imageId = patient.image_id; // Assuming 'image_id' is the field in your patient object
+        let imageId = patient.image_id;
 
 
         try {
@@ -202,7 +202,7 @@ const PatientDetail = () => {
                 <br />
 
                 <button type="submit">Save Changes</button>
-                <button type="button" onClick={handleCancelEdit}>Cancel Edit</button>
+                <button type="button" onClick={handleCancelEdit} className="cancel-edit-button">Cancel Edit</button>
                 <button type="button" onClick={handleDelete}>Delete Patient</button>
 
                 <Modal show={showModal} onClose={handleCloseModal}>
