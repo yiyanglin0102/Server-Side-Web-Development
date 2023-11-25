@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import PatientDetail from './components/PatientDetail';
-import './components/styles/App.css';
-
+import Register from './Register';
+import Login from './Login';
+import Dashboard from './Dashboard';
+import PatientDetail from './PatientDetail';
+import './styles/App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,10 +24,15 @@ function App() {
             {!isAuthenticated && (
               <>
                 <li>
-                  <Link to="/register">Register</Link>
+                  <Link to="/">Home</Link>
                 </li>
+
                 <li>
                   <Link to="/login">Login</Link>
+                </li>
+
+                <li>
+                  <Link to="/register">Register</Link>
                 </li>
               </>
             )}
@@ -52,7 +56,6 @@ function App() {
             <Route path="/dashboard" element={isAuthenticated ? <Dashboard username={username} /> : <Navigate to="/login" />} />
             <Route path="/" element={<Home />} />
             <Route path="/patient/:id" element={<PatientDetail />} />
-
           </Routes>
         </div>
       </div>
@@ -61,7 +64,10 @@ function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return <>
+    <h2>Welcome to <br /> Healthcare System !</h2>
+    <img src="/health.jpg" alt="Home" style={{ height: '300px' }} />
+  </>;
 }
 
 export default App;
