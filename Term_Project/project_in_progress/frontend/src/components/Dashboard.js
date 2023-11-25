@@ -136,9 +136,10 @@ const Dashboard = (props) => {
         {selectedTab === 'patient' && (
           <div>
             <h2>Patient Details</h2>
-            {!isAddingPatient && <button onClick={handleAddPatient}>Add New Patient</button>}
+            {!isAddingPatient && <button className="add-patient-button" onClick={handleAddPatient}>
+              Add New Patient</button>}
             {!isAddingPatient && (
-              <ul>
+              <ul className="patient-list">
                 {patients
                   .sort((a, b) => {
                     // Compare by first name, then by last name if first names are the same

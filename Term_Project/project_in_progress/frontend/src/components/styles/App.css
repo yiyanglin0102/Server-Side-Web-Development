@@ -1,17 +1,54 @@
-.logout-button {
-    background-color: #4CAF50; /* Green */
+
+  nav {
+    background-color: #007bff; /* Blue background */
+    padding: 10px 20px; /* Padding around the content */
+}
+
+nav ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align list items in a row */
+    align-items: center; /* Vertically center items */
+}
+
+nav ul li {
+    margin-right: 20px; /* Space between list items */
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* No margin for the last item */
+}
+
+nav a, nav button {
+    color: white; /* White text for links and buttons */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 16px; /* Font size for links */
+}
+
+nav button {
+    background: none;
     border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    background-color: #45a049;
-  }
-  
+    padding: 0;
+    margin: 0;
+}
+
+/* Style for the active link or page */
+.active-link {
+    text-decoration: underline;
+    font-weight: bold;
+}
+body {
+  font-family: Arial, sans-serif; /* Use a clean, readable font */
+  line-height: 1.6; /* Line height for readability */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Light background color */
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden; /* Clear floats */
+}

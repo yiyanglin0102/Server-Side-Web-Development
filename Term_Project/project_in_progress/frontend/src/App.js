@@ -45,15 +45,17 @@ function App() {
             )}
           </ul>
         </nav>
+        <div className="container">
 
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login onLoginSuccess={(user) => { setIsAuthenticated(true); setUsername(user); }} />} />
-          <Route path="/dashboard" element={isAuthenticated ? <Dashboard username={username} /> : <Navigate to="/login" />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/patient/:id" element={<PatientDetail />}  />
-          
-        </Routes>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login onLoginSuccess={(user) => { setIsAuthenticated(true); setUsername(user); }} />} />
+            <Route path="/dashboard" element={isAuthenticated ? <Dashboard username={username} /> : <Navigate to="/login" />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/patient/:id" element={<PatientDetail />} />
+
+          </Routes>
+        </div>
       </div>
     </Router>
   );

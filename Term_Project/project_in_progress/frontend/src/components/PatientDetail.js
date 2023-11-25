@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Modal from './modal';
+import Modal from './Modal';
+import './styles/PatientDetail.css'; // Adjust the path as per your directory structure
 
 const formatMongoDateForInput = (mongoDate) => {
     if (!mongoDate) return '';
@@ -153,9 +154,9 @@ const PatientDetail = () => {
     }
 
     return (
-        <div>
+        <div className="patient-detail">
             <h1>Edit Patient Information</h1>
-            {successMessage && <div className="success-message">{successMessage}</div>}
+            
 
             <form onSubmit={handleSubmit}>
                 {imagePreview && <img src={imagePreview} alt="Patient" style={{ width: '100px', height: 'auto' }} />}
@@ -205,7 +206,7 @@ const PatientDetail = () => {
                 <button type="button" onClick={handleDelete}>Delete Patient</button>
 
                 <Modal show={showModal} onClose={handleCloseModal}>
-                    <p>{successMessage}</p>
+                    {successMessage && <div className="success-message">{successMessage}</div>}
                 </Modal>
 
             </form>
