@@ -55,7 +55,7 @@
 }
 
 .prompt-container {
-    background-color: #fff;
+    background-color: #eee5e5;
     padding: 20px;
     border-radius: 5px;
     width: 80%;
@@ -65,13 +65,13 @@
 
 .prompt-container label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-weight: bold;
 }
 
 .prompt-container input[type="text"],
 .prompt-container textarea {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;

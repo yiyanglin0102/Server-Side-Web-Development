@@ -5,6 +5,29 @@ const router = express.Router();
 const Patient = require('../models/Patient');
 const Image = require('../models/Image');
 
+
+// Endpoint to search patients by name
+router.get('/search', async (req, res) => {
+    try {
+        const nameQuery = req.query.name || '';
+        console.log(nameQuery);
+        const regex = new RegExp(nameQuery, 'i'); // 'i' for case-insensitive
+        const patients = await Patient.find({
+            $or: [
+                { firstname: { $regex: regex } },
+                { lastname: { $regex: regex } }
+            ]
+        });
+        console.log(patients);
+
+        res.json(patients);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+
 // Endpoint to fetch all patients
 router.get('/', async (req, res) => {
     try {
