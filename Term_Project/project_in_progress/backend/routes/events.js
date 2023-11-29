@@ -60,4 +60,17 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) {
+            return res.status(404).json({ message: "Event not found." });
+        }
+        await Event.deleteOne({ _id: req.params.id }); // Directly delete the document without fetching it
+        res.status(200).json({ message: "Event deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;

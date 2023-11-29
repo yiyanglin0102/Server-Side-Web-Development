@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EventPrompt = ({ isOpen, onClose, onSubmit, eventData }) => {
+const EventPrompt = ({ isOpen, onClose, onSubmit, onDelete, eventData }) => {
     const [title, setTitle] = useState('');
     const [patient, setPatient] = useState('');
     const [content, setContent] = useState('');
@@ -41,6 +41,12 @@ const EventPrompt = ({ isOpen, onClose, onSubmit, eventData }) => {
     const handleSubmit = () => {
         // console.log(eventData);
         onSubmit({ title, patient, content });
+        onClose();
+    };
+
+    const handleDelete = () => {
+        // console.log(eventData);
+        onDelete();
         onClose();
     };
 
@@ -89,6 +95,7 @@ const EventPrompt = ({ isOpen, onClose, onSubmit, eventData }) => {
                 </label>
                 <button onClick={handleSubmit}>Submit</button>
                 <button onClick={onClose}>Cancel</button>
+                {eventData && eventData._id && <button onClick={handleDelete}>Delete</button>}
             </div>
 
         </div>

@@ -45,6 +45,33 @@ const EventScheduler = (props) => {
         setIsPromptOpen(true);
     };
 
+    const handleEventDelete = () => {
+
+        try {
+            axios.delete(`http://localhost:3000/events/${selectedEvent._id}`)
+                .then(response => {
+
+                    setEvents(events.map(event =>
+                        event.id === selectedEvent.id ? { ...response.data, start: moment.tz(response.data.start, TIMEZONE).toDate(), end: moment.tz(response.data.end, TIMEZONE).toDate() } : event
+                    ));
+
+                    fetchEvents();
+                    setIsPromptOpen(false);
+                    setSelectedEvent({ start: null, end: null });
+                })
+                .catch(error => {
+                    console.error("Error deleting event:", error);
+                });
+            fetchEvents();
+            setIsPromptOpen(false);
+            setSelectedEvent({ start: null, end: null });
+
+        } catch (error) {
+            console.error('Error deleting event:', error);
+            return;
+        }
+    };
+
     const handleEventSubmit = (formData) => {
         const { title, patient, content } = formData;
         const eventPayload = {
@@ -101,6 +128,7 @@ const EventScheduler = (props) => {
                 isOpen={isPromptOpen}
                 onClose={() => setIsPromptOpen(false)}
                 onSubmit={handleEventSubmit}
+                onDelete={handleEventDelete}
                 eventData={selectedEvent} // Pass the selected event data to the prompt
             />
         </div>
