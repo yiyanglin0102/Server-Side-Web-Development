@@ -19,7 +19,8 @@ const NewMail = (props) => {
       from: props.username,
       to: to,
       title: subject,
-      content: content
+      content: content,
+      isRead: false
     })
       .then(response => {
         setMails([...mails, response.data]);

@@ -6,6 +6,7 @@ const mailSchema = new Schema({
     to: String,
     title: String,
     content: String,
+    isRead: Boolean,
 });
 
 module.exports = Mail = mongoose.model('Mail', mailSchema);

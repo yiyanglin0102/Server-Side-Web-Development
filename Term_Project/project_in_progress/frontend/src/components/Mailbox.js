@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import './styles/Mailbox.css';
 
-const Mailbox = ({ mails, username, onDelete }) => {
+const Mailbox = ({ mails, username, onDelete, onRead }) => {
   const [selectedMail, setSelectedMail] = useState(null);
 
   const handleMailClick = (mail) => {
+    if (!mail.isRead) {
+      onRead(mail._id);
+    }
     setSelectedMail(selectedMail && selectedMail._id === mail._id ? null : mail);
   };
 
-  // Handler for delete button
   const handleDelete = (mailId, event) => {
-    event.stopPropagation(); // Prevent the mail click handler from firing
-    onDelete(mailId); // Call the onDelete function passed down from the parent component
+    event.stopPropagation();
+    onDelete(mailId);
   };
 
   return (
@@ -26,15 +28,15 @@ const Mailbox = ({ mails, username, onDelete }) => {
                 onClick={() => handleMailClick(mail)}
                 className={selectedMail && selectedMail._id === mail._id ? 'selected-mail' : ''}
               >
+                {!mail.isRead && <div className="unread-indicator"></div>}
                 <div className="mail-subject">{mail.title}</div>
                 {selectedMail && selectedMail._id === mail._id && (
                   <div className="mail-content">
-                    <div>From: {mail.from}</div>
-                    <div>Message: {mail.content}</div>
+                    <p>From: {mail.from}</p>
+                    <p>Message: {mail.content}</p>
                   </div>
                 )}
-                {/* Add a delete button for each mail */}
-                <button onClick={(event) => { handleDelete(mail._id, event); console.log(mail._id) }} className="delete-button">
+                <button onClick={(event) => handleDelete(mail._id, event)} className="delete-button">
                   Delete
                 </button>
               </li>

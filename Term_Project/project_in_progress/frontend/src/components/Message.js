@@ -23,17 +23,26 @@ const Message = (props) => {
   };
 
   const handleDeleteMail = (mailId) => {
-    // Call API to delete the mail from the backend
     axios.delete(`http://localhost:3000/mails/${mailId}`)
       .then(response => {
         // If the delete was successful, filter out the deleted mail from the state
         setMails(currentMails => currentMails.filter(mail => mail._id !== mailId));
-        // Optionally, you could trigger a new fetch of mails here, if the mails are also being updated elsewhere
       })
       .catch(error => {
-        // Handle any errors during the delete request
         console.error('Failed to delete mail:', error);
       });
+  };
+
+  const handleReadMail = (mailId) => {
+    try {
+      axios.patch(`http://localhost:3000/mails/${mailId}`, {
+        isRead: true
+      }).then(response => {
+      })
+    } catch (error) {
+      console.error("Error updating mail read status:", error);
+      // Handle errors as needed
+    }
   };
 
   return (
@@ -41,8 +50,7 @@ const Message = (props) => {
       {showingMailbox ? (
         <>
           <button onClick={handleNewMailClick}>New Mail</button>
-          {/* Pass the local mails state to the Mailbox */}
-          <Mailbox mails={mails} username={props.username} onDelete={handleDeleteMail} />
+          <Mailbox mails={mails} username={props.username} onDelete={handleDeleteMail} onRead={handleReadMail} />
         </>
       ) : (
         <NewMail onCancel={handleMailboxClick} username={props.username} />

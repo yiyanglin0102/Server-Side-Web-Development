@@ -17,13 +17,14 @@ router.get('/', async (req, res) => {
 
 // Endpoint to create a new patient
 router.post('/', async (req, res) => {
-    const { from, to, title, content } = req.body;
+    const { from, to, title, content, isRead } = req.body;
 
     const newMail = new Mail({
         from,
         to,
         title,
-        content
+        content,
+        isRead
     });
 
     try {
@@ -43,6 +44,27 @@ router.delete('/:id', async (req, res) => {
         }
         await Mail.deleteOne({ _id: req.params.id }); // Directly delete the document without fetching it
         res.status(200).json({ message: "Mail deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Endpoint to update a mail's read status
+router.patch('/:id', async (req, res) => {
+    try {
+        const mail = await Mail.findById(req.params.id);
+        if (!mail) {
+            return res.status(404).json({ message: "Mail not found." });
+        }
+
+        // Update only the fields that are sent in the request
+        if (req.body.isRead !== undefined) {
+            mail.isRead = req.body.isRead;
+        }
+        // Add similar lines for other fields you might want to update
+
+        await mail.save(); // Save the updated mail
+        res.status(200).json(mail); // Return the updated mail data
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

@@ -28,6 +28,7 @@
   margin-top: 10px;
   border-top: 1px solid #eee;
   padding-top: 10px;
+  text-align: left;
 }
 
 .delete-button {
@@ -37,7 +38,8 @@
   padding: 5px 10px;
   margin-left: 10px;
   cursor: pointer;
-  float: right; /* Align the delete button to the right */
+  float: right;
+  /* Align the delete button to the right */
 }
 
 .delete-button:hover {
@@ -49,4 +51,19 @@
   content: "";
   display: table;
   clear: both;
+}
+
+/* Style for the unread indicator */
+.unread-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 50%;
+  /* Additional styling as needed */
+}
+
+/* Style for the mail subject */
+.mail-subject {
+  flex-grow: 1;
+  /* Allow the mail subject to take up remaining space */
 }
