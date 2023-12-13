@@ -1,0 +1,160 @@
+[{
+  "_id": {
+    "$oid": "656f95a1261c3e9c9ad02c8a"
+  },
+  "title": "Advancements in Cardiovascular Health",
+  "username": "John",
+  "patient": "Kesden Cedar",
+  "content": "This seminar focuses on the latest research and treatments in cardiology. Leading experts discuss new medications, surgical techniques, and preventative measures for heart disease.",
+  "start": {
+    "$date": "2023-12-04T13:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-04T16:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9631261c3e9c9ad02c8e"
+  },
+  "title": "Initial Consultation: Understanding Health History",
+  "username": "John",
+  "patient": "Skyden Zen",
+  "content": "A first-time meeting where the physician reviews the patient's medical history, discusses current health concerns, and establishes a baseline for future care.",
+  "start": {
+    "$date": "2023-12-05T14:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-05T15:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9673261c3e9c9ad02c92"
+  },
+  "title": "Follow-Up Appointment: Treatment Progress Review",
+  "username": "John",
+  "patient": "Million Kaspen",
+  "content": "A follow-up meeting to assess the progress of the patient's treatment plan, make necessary adjustments, and address any new symptoms or concerns.",
+  "start": {
+    "$date": "2023-12-05T16:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-05T17:30:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f96b5261c3e9c9ad02c96"
+  },
+  "title": "Chronic Condition Management: Diabetes",
+  "username": "John",
+  "patient": "Kesden Cedar",
+  "content": "Regularly scheduled appointment to manage a chronic condition like diabetes. Includes reviewing blood sugar levels, medication adjustments, dietary guidance, and lifestyle recommendations.",
+  "start": {
+    "$date": "2023-12-06T15:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-06T16:30:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f96f5261c3e9c9ad02ca7"
+  },
+  "title": "Pre-Surgical Consultation: Procedure Overview",
+  "username": "John",
+  "patient": "Araminat Gwenlnn",
+  "content": "A pre-operative meeting where the physician explains the surgical procedure, discusses risks and benefits, and answers any questions the patient may have.",
+  "start": {
+    "$date": "2023-12-07T13:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-07T15:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9724261c3e9c9ad02caa"
+  },
+  "title": "Wellness and Preventive Care Visit",
+  "username": "John",
+  "patient": "",
+  "content": "An annual check-up focused on preventive care. Includes routine screenings, vaccinations, and discussions about healthy lifestyle choices.",
+  "start": {
+    "$date": "2023-12-08T13:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-08T19:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f977c261c3e9c9ad02cb6"
+  },
+  "title": "Mental Health Assessment and Support",
+  "username": "John",
+  "patient": "Honesti Idalia",
+  "content": "A consultation to discuss mental health concerns, evaluate symptoms, and explore treatment options such as counseling or medication.",
+  "start": {
+    "$date": "2023-12-04T20:00:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-04T20:30:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9c6f261c3e9c9ad02d93"
+  },
+  "title": "Post-Operative Follow-Up Consultation",
+  "username": "John",
+  "patient": "Million Kaspen",
+  "content": "A meeting to assess the patient's recovery following a surgical procedure. The physician checks for signs of complications, healing progress, and discusses any necessary adjustments in post-operative care.",
+  "start": {
+    "$date": "2023-12-11T13:30:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-11T15:30:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9c9f261c3e9c9ad02d97"
+  },
+  "title": "Initial Diagnostic Consultation for New Symptoms",
+  "username": "John",
+  "patient": "Idalia Eastley",
+  "content": "A consultation where the physician evaluates new symptoms reported by the patient, conducts initial examinations, and plans further diagnostic tests to identify the underlying cause.",
+  "start": {
+    "$date": "2023-12-12T15:30:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-12T16:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9cc0261c3e9c9ad02d9b"
+  },
+  "title": "Mental Health Assessment and Therapy Session",
+  "username": "John",
+  "patient": "Tariq Abdullah",
+  "content": "A session dedicated to assessing a patient's mental health, discussing any psychological issues or stressors, and providing therapy or recommending further psychiatric support.",
+  "start": {
+    "$date": "2023-12-13T13:30:00.000Z"
+  },
+  "end": {
+    "$date": "2023-12-13T16:00:00.000Z"
+  },
+  "__v": 0
+}]

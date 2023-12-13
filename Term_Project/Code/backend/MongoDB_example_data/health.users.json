@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "656f94b5261c3e9c9ad02c4b"
+  },
+  "username": "John",
+  "password": "$2a$10$QpmoOy4nyRYocgzrvCx3t.awkyNXLuh1Myed/p6aS9GJ1x5h4D8fC",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9822261c3e9c9ad02ccd"
+  },
+  "username": "Amy",
+  "password": "$2a$10$wygIghW3eD.Tj1GsddU9Puv2eWR9Hg48GUcePoEjGU6LI4seVtbpa",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f99ee261c3e9c9ad02cf7"
+  },
+  "username": "Jackson",
+  "password": "$2a$10$5dAs8.Ga6Zx28YpBNVGwKuA/Z5V9BMU8TKP1VDiC4FtnZRhTfL6eW",
+  "__v": 0
+}]

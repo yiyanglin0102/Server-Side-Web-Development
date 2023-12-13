@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "656f9819261c3e9c9ad02cca"
+  },
+  "from": "John",
+  "to": "Amy",
+  "title": "Referral for Specialist Evaluation - Cardiology",
+  "content": "Dear Dr. Amy,\n\nI am referring my patient Honesti, who has been experiencing recurrent chest pains and has a history of hypertension. I believe a cardiological evaluation, including an ECG and stress test, would be beneficial. Please find attached the patient's medical history and recent lab results. Your expertise in this matter is greatly appreciated. \n\nBest regards,\nJohn",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f99b3261c3e9c9ad02cdf"
+  },
+  "from": "Amy",
+  "to": "John",
+  "title": "Referral for Specialist Evaluation: Patient Jane Smith",
+  "content": "Dear Dr. John,\n\nI am writing to refer my patient, Jane Smith, for a comprehensive cardiological evaluation. Her medical history and recent symptoms, which I have detailed in the attached document, suggest the need for specialized assessment. Your expertise in this field would be greatly appreciated.\n\nKind regards,\nDr. Emily Johnson.",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9a17261c3e9c9ad02cfd"
+  },
+  "from": "Jackson",
+  "to": "John",
+  "title": "Collaboration Inquiry: Ongoing Research Study on Alzheimer's Disease",
+  "content": "Dear Dr. John, I am reaching out to propose a collaborative venture on a research study focused on Alzheimer's disease. Our preliminary findings, outlined in the attached summary, could benefit significantly from your expertise in neuroscience. I look forward to the possibility of collaborative research. Regards, Dr. Jackson",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9a4c261c3e9c9ad02d0b"
+  },
+  "from": "Jackson",
+  "to": "John",
+  "title": "Journal Article Recommendation: Breakthroughs in Hepatitis C Treatment",
+  "content": "Dear Dr. John, I wish to recommend a recent publication concerning Hepatitis C, which I believe would be of great interest to your current research. I have included a summary and the full article for your perusal. Best regards, Dr. Jackson",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9a80261c3e9c9ad02d13"
+  },
+  "from": "Amy",
+  "to": "John",
+  "title": "Feedback Requested on Innovative Surgical Technique",
+  "content": "Dear Dr. John, I am currently developing a novel surgical technique and would highly value your feedback on its potential efficacy and safety. Detailed information about the technique is attached. Your professional opinion would be greatly appreciated. Regards, Dr. Amy",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9aa5261c3e9c9ad02d17"
+  },
+  "from": "Amy",
+  "to": "John",
+  "title": "Patient Update: Post-Referral Outcome for Thomas Lee",
+  "content": "Dear Dr. John, Following your referral, I am providing an update on our mutual patient, Thomas Lee. The treatment outcomes and ongoing management plan are detailed in the attached report. Your continued collaboration in Mr. Lee's care is valued. Sincerely, Dr. Amy",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9ad1261c3e9c9ad02d1f"
+  },
+  "from": "Jackson",
+  "to": "John",
+  "title": "Proposal for Multidisciplinary Case Conference on Pediatric Asthma",
+  "content": "Dear Dr. John, I propose a multidisciplinary conference to discuss a complex case of pediatric asthma. Your expertise in pulmonology would greatly contribute to formulating a comprehensive care plan. I have attached the case details for your consideration. Sincerely, Dr. Jackson",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9b26261c3e9c9ad02d2e"
+  },
+  "from": "Amy",
+  "to": "John",
+  "title": "Contribution Request for Comprehensive Review on Cardiac Imaging Techniques",
+  "content": "Dear Dr. John, I am currently composing a comprehensive review article on the latest developments in cardiac imaging techniques. Given your extensive expertise in cardiology and imaging, I would be honored if you could contribute to this piece. The outline and proposed topics are enclosed for your review. I eagerly anticipate the prospect of your collaboration. Warm regards, Dr. Amy",
+  "isRead": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656f9b5a261c3e9c9ad02d36"
+  },
+  "from": "Jackson",
+  "to": "John",
+  "title": "Inquiry on Latest Techniques in Minimally Invasive Surgery",
+  "content": "Dear Dr. John, I am reaching out to inquire about the latest techniques in minimally invasive surgery. As I am considering incorporating these methods into my practice, your experience and advice in this field would be most beneficial. I am particularly interested in patient outcomes and recovery times. Kind regards, Dr. Jackson",
+  "isRead": true,
+  "__v": 0
+}]

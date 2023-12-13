@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     try {
         const mails = await Mail.find(); // Fetch all patients from the database.
         res.json(mails);
-        // console.log(mails)
     } catch (err) {
         res.status(500).json({ message: err.message }); // Return error if any.
     }
@@ -38,7 +37,6 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const mail = await Mail.findById(req.params.id);
-        // console.log(mail);
         if (!mail) {
             return res.status(404).json({ message: "Mail not found." });
         }
@@ -56,13 +54,11 @@ router.patch('/:id', async (req, res) => {
         if (!mail) {
             return res.status(404).json({ message: "Mail not found." });
         }
-
         // Update only the fields that are sent in the request
         if (req.body.isRead !== undefined) {
             mail.isRead = req.body.isRead;
         }
         // Add similar lines for other fields you might want to update
-
         await mail.save(); // Save the updated mail
         res.status(200).json(mail); // Return the updated mail data
     } catch (err) {
