@@ -142,8 +142,9 @@ const Dashboard = (props) => {
                 {patients
                   .sort((a, b) => {
                     // Compare by first name, then by last name if first names are the same
-                    let nameA = a.firstname.toLowerCase() + a.lastname.toLowerCase();
-                    let nameB = b.firstname.toLowerCase() + b.lastname.toLowerCase();
+                    let nameA = (a.firstname || '').toLowerCase() + (a.lastname || '').toLowerCase();
+                    let nameB = (b.firstname || '').toLowerCase() + (b.lastname || '').toLowerCase();
+
                     if (nameA < nameB) return -1;
                     if (nameA > nameB) return 1;
                     return 0;
