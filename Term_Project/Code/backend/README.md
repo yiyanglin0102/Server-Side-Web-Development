@@ -1,9 +1,8 @@
-# Server
+### Server
 
+#### Health API
 
-# Health API
-
-The following API can be accessed at `http://localhost:3000/`
+The following API can be accessed at `http://localhost:3001/`
 
 | Endpoint             | Auth Required | Get | Post | Put | Delete | Patch |
 | -------------------- | ------------- | --- | ---- | --- | ------ | ----- |
@@ -18,7 +17,7 @@ The following API can be accessed at `http://localhost:3000/`
 | /images              |               |     | ✔︎    |     |        |       |
 | /images/`<event_id>` |               | ✔︎   |      |     | ✔︎      |       |
 
-### Auth and Tokens
+#### Auth and Tokens
 
 For this API, users are required to provide their credentials to access personalized information. These credentials are obtained through token requests, which are temporary codes that serve as proof of identity. Tokens eliminate the need to repeatedly provide a username and password with each request. The process for obtaining these tokens is detailed below.
 
@@ -42,7 +41,7 @@ Once the user registration is successfully completed, the server will send a res
 
 In order to login with username and password, sending request in `/login` endpoint, with a `POST` method. Effectively, you will be sending the username and password in the authorization header.
 
-### Event
+#### Event
 
 Event route in the endpoint is for creating, updating, deleting in the `Scheduler` tab. 
 
@@ -60,7 +59,7 @@ Event route in the endpoint is for creating, updating, deleting in the `Schedule
 ```
 
 
-### Patients
+#### Patients
 
 Patient route in the endpoint is for adding, updating, deleting patient for each physician in the `Patient` tab. 
 
@@ -78,7 +77,7 @@ Patient route in the endpoint is for adding, updating, deleting patient for each
 }
 ```
 
-### Mails
+#### Mails
 
 Mail route in the endpoint is for sending and deleting messages for communication between users, such as, physician. User type the username of the receiver in the `To` filling box in the `Messages` tab.
 
@@ -93,7 +92,7 @@ Mail route in the endpoint is for sending and deleting messages for communicatio
 }
 ```
 
-### Images
+#### Images
 
 Image route in the endpoint is for storing, updating and deleting images in the database matching for each user. 
 
@@ -107,7 +106,7 @@ Image route in the endpoint is for storing, updating and deleting images in the 
 ```
 
 
-## Database
+#### Database
 
 Health
-![Health](./MongoDB_example_data/MongoDB.png)
+![Health](./MongoDB.png)
