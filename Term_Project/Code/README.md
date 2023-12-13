@@ -17,20 +17,29 @@ Key open-source libraries and dependencies used in the frontend:
 [**React Big Calendar**](https://github.com/jquense/react-big-calendar): An open-source calendar component for React. In the healthcare system application by leveraging this library to implement the Patient Reservation Calendar System.
 
 [**axios**](https://www.npmjs.com/package/axios): A promise-based HTTP client for making API requests.
-moment-timezone: A library for handling time and time zones.
-react-router-dom: A library for routing in React applications.
+
+[**moment-timezone**](https://www.npmjs.com/package/moment-timezone): A library for handling time and time zones.
+
+[**react-router-dom**](https://www.npmjs.com/package/react-router-dom): A library for routing in React applications.
 
 
 ## Backend Dependencies
 key open-source libraries and dependencies used in the backend:
 
 [**Express**](https://expressjs.com/): A Node.js web application framework.
+
 [**Mongoose**](https://www.mongodb.com/): A database and ODM (Object-Document Mapper) for MongoDB.
+
 [**bcryptjs**](https://www.npmjs.com/package/bcryptjs): A library for hashing passwords.
+
 [**cors**](https://www.npmjs.com/package/cors): A middleware for handling Cross-Origin Resource Sharing.
+
 [**dotenv**](https://www.npmjs.com/package/dotenv): A module for loading environment variables.
+
 [**jsonwebtoken**](https://www.npmjs.com/package/jsonwebtoken): A library for creating and verifying JSON Web Tokens (JWT).
+
 [**multer**](https://www.npmjs.com/package/multer): Middleware for handling file uploads.
+
 [**passport-jwt**](https://www.npmjs.com/package/passport-jwt): Libraries for authentication.
 
 ## Getting Started
