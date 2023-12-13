@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
             const imgSrc = `data:${image.contentType};base64,${imgBase64}`;
             res.send(imgSrc); // Send the actual image data
         } else {
-            res.status(404).send('No images found123');
+            res.status(404).send('No images found');
         }
     } catch (err) {
         console.error("Error fetching image:", err); // Debug log

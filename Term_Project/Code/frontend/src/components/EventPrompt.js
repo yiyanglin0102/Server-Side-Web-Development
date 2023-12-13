@@ -12,7 +12,7 @@ const EventPrompt = ({ isOpen, onClose, onSubmit, onDelete, eventData }) => {
 
         if (input.length > 1) {
             try {
-                const response = await fetch(`http://localhost:3000/patients/search?name=${input}`);
+                const response = await fetch(`http://localhost:3001/patients/search?name=${input}`);
                 const data = await response.json();
                 setSuggestions(data.map(patient => `${patient.firstname} ${patient.lastname}`));
             } catch (error) {

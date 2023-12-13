@@ -11,11 +11,7 @@ const NewMail = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would usually have logic to send the email...
-    // onSubmit({ subject, content }); // For example, send this data back to the parent component or server
-
-    // console.log(`Saving new mail: To: ${to}, ${subject} , ${content}`);
-    axios.post('http://localhost:3000/mails', {
+    axios.post('http://localhost:3001/mails', {
       from: props.username,
       to: to,
       title: subject,

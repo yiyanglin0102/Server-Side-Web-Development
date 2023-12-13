@@ -15,7 +15,7 @@ const EventScheduler = (props) => {
     const username = props.username || "null";
 
     const fetchEvents = useCallback(() => {
-        axios.get('http://localhost:3000/events')
+        axios.get('http://localhost:3001/events')
             .then(response => {
                 const updatedEvents = response.data
                     .filter(event => event.username === username)
@@ -48,7 +48,7 @@ const EventScheduler = (props) => {
     const handleEventDelete = () => {
 
         try {
-            axios.delete(`http://localhost:3000/events/${selectedEvent._id}`)
+            axios.delete(`http://localhost:3001/events/${selectedEvent._id}`)
                 .then(response => {
 
                     setEvents(events.map(event =>
@@ -86,8 +86,8 @@ const EventScheduler = (props) => {
 
         const isNewEvent = !selectedEvent._id;
         const endpoint = isNewEvent ?
-            'http://localhost:3000/events' :
-            `http://localhost:3000/events/${selectedEvent._id}`;
+            'http://localhost:3001/events' :
+            `http://localhost:3001/events/${selectedEvent._id}`;
         const method = isNewEvent ? axios.post : axios.put;
 
         method(endpoint, eventPayload)

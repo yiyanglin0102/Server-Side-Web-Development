@@ -34,7 +34,7 @@ const PatientDetail = () => {
     useEffect(() => {
         const fetchPatient = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/patients/${id}`);
+                const response = await axios.get(`http://localhost:3001/patients/${id}`);
                 const fetchedPatient = response.data;
 
                 if (fetchedPatient.birthdate) {
@@ -45,7 +45,7 @@ const PatientDetail = () => {
 
                 if (fetchedPatient.image_id) {
                     try {
-                        const imgResponse = await axios.get(`http://localhost:3000/images/${fetchedPatient.image_id}`);
+                        const imgResponse = await axios.get(`http://localhost:3001/images/${fetchedPatient.image_id}`);
                         setImagePreview(imgResponse.data);
                     } catch (error) {
                         console.error("Error fetching image:", error);
@@ -77,7 +77,7 @@ const PatientDetail = () => {
             formData.append('myfile', selectedFile);
 
             try {
-                const response = await fetch('http://localhost:3000/images', {
+                const response = await fetch('http://localhost:3001/images', {
                     method: 'POST',
                     body: formData,
                 });
@@ -91,7 +91,7 @@ const PatientDetail = () => {
 
         try {
             const updatedPatient = { ...patient, image_id: imageId };
-            await axios.put(`http://localhost:3000/patients/${id}`, updatedPatient);
+            await axios.put(`http://localhost:3001/patients/${id}`, updatedPatient);
             setSuccessMessage('Patient updated successfully!');
             setShowModal(true); // Show the modal on successful update
         } catch (error) {
@@ -126,9 +126,8 @@ const PatientDetail = () => {
     const handleDelete = async () => {
         let imageId = patient.image_id;
 
-
         try {
-            await axios.delete(`http://localhost:3000/images/${imageId}`);
+            await axios.delete(`http://localhost:3001/images/${imageId}`);
         } catch (error) {
             console.error('Error deleting image:', error);
             return; // Exit the function if the image upload fails
@@ -136,7 +135,7 @@ const PatientDetail = () => {
 
 
         try {
-            await axios.delete(`http://localhost:3000/patients/${id}`);
+            await axios.delete(`http://localhost:3001/patients/${id}`);
             setSuccessMessage('Patient deleted successfully!');
         } catch (error) {
             console.error("Error updating patient:", error);

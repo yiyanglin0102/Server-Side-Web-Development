@@ -23,7 +23,7 @@ const Message = (props) => {
   };
 
   const handleDeleteMail = (mailId) => {
-    axios.delete(`http://localhost:3000/mails/${mailId}`)
+    axios.delete(`http://localhost:3001/mails/${mailId}`)
       .then(response => {
         // If the delete was successful, filter out the deleted mail from the state
         setMails(currentMails => currentMails.filter(mail => mail._id !== mailId));
@@ -35,13 +35,12 @@ const Message = (props) => {
 
   const handleReadMail = (mailId) => {
     try {
-      axios.patch(`http://localhost:3000/mails/${mailId}`, {
+      axios.patch(`http://localhost:3001/mails/${mailId}`, {
         isRead: true
       }).then(response => {
       })
     } catch (error) {
       console.error("Error updating mail read status:", error);
-      // Handle errors as needed
     }
   };
 
