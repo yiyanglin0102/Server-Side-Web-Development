@@ -2,6 +2,8 @@
 
 A simple healthcare system application has been developed for use by physicians, hospital staff, and potential patients. This application allows users to perform various functions, including creating, updating, and deleting calendar events, as well as managing patient information. Additionally, the messaging feature enables users to communicate with senders and receivers through email. The frontend of the application is built using React, while it connects to the backend through the Health API by sending requests.
 
+[![DEMO](https://img.youtube.com/vi/yAvIbZjLZE8/0.jpg)](https://youtu.be/yAvIbZjLZE8)
+
 
 ## Features
 
